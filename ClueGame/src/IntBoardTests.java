@@ -55,6 +55,18 @@ public class IntBoardTests {
 	
 	//testTargets"index"_"numOfSteps"(index, number of Steps)
 	@Test
+	public void testTargets4_2(){
+		LinkedList testList = board.getAdjList(0);
+		board.startTargets(4, 2);
+		Set targets= board.getTargets();
+		Assert.assertEquals(4, targets.size());
+		Assert.assertTrue(targets.contains(12));
+		Assert.assertTrue(targets.contains(9));
+		Assert.assertTrue(targets.contains(1));
+		Assert.assertTrue(targets.contains(6));
+	}
+	
+	@Test
 	public void testTargets0_3(){
 		LinkedList testList = board.getAdjList(0);
 		board.startTargets(0, 3);

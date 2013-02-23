@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -6,15 +7,15 @@ public class IntBoard {
 	//variables
 	private final int TOTAL_ROWS = 4;
 	private final int TOTAL_COLS = 4;
-	LinkedList<Integer> adjacencies;
+	private LinkedList<Integer> adjacencies;
 	ArrayList<LinkedList<Integer>> listOfAdjacencies;
+	
 	boolean [] visited = new boolean[TOTAL_ROWS*TOTAL_COLS];
-	Set targets = new HashSet();
+	Set targets = new HashSet<Integer>();
 	
 	//Constructor
 	public IntBoard() {
 		super();
-		Arrays.fill(visited, false);
 	}
 	
 	//methods
@@ -58,26 +59,39 @@ public class IntBoard {
 	}
 	
 	public void startTargets(int index, int steps){
+		Arrays.fill(visited, false);
+		targets = new HashSet<Integer>();
+		visited[index] = true;
+		calcTargets(index, steps);
+	}
+	
+	public void calcTargets(int thisCell, int steps){	
 		ArrayList<LinkedList<Integer>> tempAdjacencies = listOfAdjacencies;
+		LinkedList<Integer> adjacentCells = tempAdjacencies.get(thisCell);
+		LinkedList<Integer> adjacentCellsTemp = new LinkedList<Integer>();
 		
-		LinkedList<Integer> adjacentCells = tempAdjacencies.get(index);
-		//LinkedList<Integer> adjacentCells = listOfAdjacencies.get(index);
 
 		for(Integer i: adjacentCells){
-			if(visited[i]){
-				adjacentCells.remove(i);
+			if(!visited[i]){
+				adjacentCellsTemp.add(i);
+			} 
+		}
+		adjacentCells = adjacentCellsTemp;
+		
+		for (Integer i: adjacentCells) {
+			setVisitedTrue(i);
+			if (steps == 1) {
+				targets.add(i);
+			} else {
+				steps -= 1;
+				calcTargets(i, steps);
+				visited[i] = false;
 			}
+			
+			
+			
 		}
 		
-		for (int i = 0; i < adjacentCells.size(); ++i) {
-			setVisitedTrue(adjacentCells.get(i));
-			if (steps == 1) {
-				targets.add(adjacentCells.get(i));
-			} else {
-				startTargets(adjacentCells.get(i), steps--);
-			}
-			setVisitedFalse(adjacentCells.get(i));
-		}
 	}
 	
 	public Set getTargets(){
