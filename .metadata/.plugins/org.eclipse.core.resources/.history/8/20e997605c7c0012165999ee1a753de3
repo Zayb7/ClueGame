@@ -1,0 +1,89 @@
+import static org.junit.Assert.*;
+
+import java.util.Set;
+
+import org.junit.*;
+
+
+public class IntBoardTests {
+	//Setup board
+	IntBoard board;
+	
+	@Before
+	public void setUpBoard(){
+		board = new IntBoard();
+	} 
+	
+	// testing index
+	@Test
+	public void testCalcIndex(){
+		assertEquals(3, board.calcIndex(0,3));
+		assertEquals(8, board.calcIndex(0,2));
+		assertEquals(10, board.calcIndex(2,2));
+		assertEquals(14, board.calcIndex(3,2));
+	}
+	
+	//testing adjacency lists
+	@Test
+	public void testAdjacencyCorner(){
+		
+	}
+	
+	@Test
+	public void testAdjacencyEdge(){
+		
+	}
+	
+	@Test 
+	public void testAdjacencyOffBy1(){
+		
+	}
+	
+	//testing path creation
+	
+	//testTargets"index"_"numOfSteps"(index, number of Steps)
+	@Test
+	public void testTargets0_3(){
+		board.startTargets(0, 3);
+		Set targets= board.getTargets();
+		Assert.assertEquals(6, targets.size());
+		Assert.assertTrue(targets.contains(12));
+		Assert.assertTrue(targets.contains(9));
+		Assert.assertTrue(targets.contains(1));
+		Assert.assertTrue(targets.contains(6));
+		Assert.assertTrue(targets.contains(3));
+		Assert.assertTrue(targets.contains(4));
+	}
+	
+	@Test 
+	public void testTargets6_3(){
+	
+		
+	}
+	
+	@Test 
+	public void testTargets7_2(){
+	
+		
+	}
+	
+	@Test 
+	public void testTargets15_4(){
+	
+		
+	}
+	
+	@Test 
+	public void testTargets10_2(){
+	
+		
+	}
+	
+	@Test 
+	public void testTargets8_6(){
+	
+		
+	}
+	
+
+}

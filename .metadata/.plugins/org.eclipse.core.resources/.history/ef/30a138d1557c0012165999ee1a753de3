@@ -1,0 +1,9 @@
+
+public class IntBoard {
+
+	public IntBoard() {
+		super();
+		// TODO constructor stub
+	}
+
+}
