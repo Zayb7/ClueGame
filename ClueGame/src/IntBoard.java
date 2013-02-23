@@ -72,14 +72,14 @@ public class IntBoard {
 		
 		
 		for(Integer i: adjacentCells){
-			System.out.println(i);
+			//System.out.println(i);
 			if(!visited[i]){
 				adjacentCellsTemp.add(i);
 			} 
 		}
 		
 		for (Integer i: adjacentCellsTemp) {
-			System.out.println(i);
+			//System.out.println(i);
 			setVisitedTrue(i);
 			if (steps == 1) {
 				targets.add(i);
@@ -92,7 +92,7 @@ public class IntBoard {
 	}
 	
 	public Set getTargets(){
-		//System.out.println(targets);
+		System.out.println(targets);
 		return targets;
 	}
 	
