@@ -56,6 +56,7 @@ public class IntBoardTests {
 	//testTargets"index"_"numOfSteps"(index, number of Steps)
 	@Test
 	public void testTargets0_3(){
+		LinkedList testList = board.getAdjList(0);
 		board.startTargets(0, 3);
 		Set targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
@@ -69,6 +70,7 @@ public class IntBoardTests {
 	
 	@Test 
 	public void testTargets6_3(){
+		LinkedList testList = board.getAdjList(6);
 		board.startTargets(6, 3);
 		Set targets= board.getTargets();
 		Assert.assertEquals(8, targets.size());
@@ -84,6 +86,7 @@ public class IntBoardTests {
 	
 	@Test 
 	public void testTargets7_2(){
+		LinkedList testList = board.getAdjList(7);
 		board.startTargets(7, 2);
 		Set targets= board.getTargets();
 		Assert.assertEquals(4, targets.size());
@@ -95,6 +98,7 @@ public class IntBoardTests {
 	
 	@Test 
 	public void testTargets15_4(){
+		LinkedList testList = board.getAdjList(15);
 		board.startTargets(15, 4);
 		Set targets= board.getTargets();
 		Assert.assertEquals(5, targets.size());
@@ -107,6 +111,7 @@ public class IntBoardTests {
 	
 	@Test 
 	public void testTargets10_2(){
+		LinkedList testList = board.getAdjList(10);
 		board.startTargets(10, 2);
 		Set targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
@@ -120,6 +125,7 @@ public class IntBoardTests {
 	
 	@Test 
 	public void testTargets8_6(){
+		LinkedList testList = board.getAdjList(8);
 		board.startTargets(8, 6);
 		Set targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
