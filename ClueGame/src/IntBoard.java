@@ -85,19 +85,10 @@ public class IntBoard {
 			} else {
 				steps -= 1;
 				calcTargets(i, steps);
-				visited[i] = false;
 			}
-<<<<<<< HEAD
 			
-			setVisitedFalse(adjacentCells.get(i));
-
-=======
-			
-			
-			
->>>>>>> a4c0eb5a7d4630077f84782f7c387e866426acfd
+			setVisitedFalse(i);
 		}
-		
 	}
 	
 	public Set getTargets(){
