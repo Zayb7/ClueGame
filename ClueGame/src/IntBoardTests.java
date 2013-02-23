@@ -18,7 +18,7 @@ public class IntBoardTests {
 	@Test
 	public void testCalcIndex(){
 		assertEquals(3, board.calcIndex(0,3));
-		assertEquals(8, board.calcIndex(0,2));
+		assertEquals(2, board.calcIndex(0,2));
 		assertEquals(10, board.calcIndex(2,2));
 		assertEquals(14, board.calcIndex(3,2));
 	}
