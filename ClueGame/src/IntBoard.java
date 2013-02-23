@@ -31,11 +31,11 @@ public class IntBoard {
 					int yminus1 = calcIndex(i, j-1);
 					adjacencies.add(yminus1);
 				}
-				if (i+1 <= TOTAL_ROWS) {
+				if (i+1 < TOTAL_ROWS) {
 					int xplus1 = calcIndex(i+1, j);
 					adjacencies.add(xplus1);
 				}
-				if (j+1 <= TOTAL_COLS) {
+				if (j+1 < TOTAL_COLS) {
 					int yplus1 = calcIndex(i, j+1);
 					adjacencies.add(yplus1);
 				}
@@ -70,21 +70,21 @@ public class IntBoard {
 		LinkedList<Integer> adjacentCells = tempAdjacencies.get(thisCell);
 		LinkedList<Integer> adjacentCellsTemp = new LinkedList<Integer>();
 		
-
+		
 		for(Integer i: adjacentCells){
+			System.out.println(i);
 			if(!visited[i]){
 				adjacentCellsTemp.add(i);
 			} 
 		}
-		adjacentCells = adjacentCellsTemp;
 		
-		for (Integer i: adjacentCells) {
+		for (Integer i: adjacentCellsTemp) {
+			System.out.println(i);
 			setVisitedTrue(i);
 			if (steps == 1) {
 				targets.add(i);
 			} else {
-				steps -= 1;
-				calcTargets(i, steps);
+				calcTargets(i, steps - 1);
 			}
 			
 			setVisitedFalse(i);
@@ -92,7 +92,7 @@ public class IntBoard {
 	}
 	
 	public Set getTargets(){
-		System.out.println(targets);
+		//System.out.println(targets);
 		return targets;
 	}
 	
