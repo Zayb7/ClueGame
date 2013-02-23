@@ -9,7 +9,7 @@ public class IntBoard {
 	LinkedList<Integer> adjacencies;
 	ArrayList<LinkedList<Integer>> listOfAdjacencies;
 	boolean [] visited = new boolean[TOTAL_ROWS*TOTAL_COLS];
-	Set targets = new HashSet();
+	Set targets = new HashSet<Integer>();
 	
 	//Constructor
 	public IntBoard() {
@@ -59,7 +59,7 @@ public class IntBoard {
 	
 	public void startTargets(int index, int steps){
 		ArrayList<LinkedList<Integer>> tempAdjacencies = listOfAdjacencies;
-		LinkedList<Integer> adjacentCells = listOfAdjacencies.get(index);
+		LinkedList<Integer> adjacentCells = tempAdjacencies.get(index);
 		for (int i = 0; i < adjacentCells.size(); ++i) {
 			setVisitedTrue(i);
 			if (steps == 1) {
@@ -67,7 +67,9 @@ public class IntBoard {
 			} else {
 				startTargets(index, steps--);
 			}
+				
 			setVisitedFalse(index);
+			
 		}
 	}
 	
