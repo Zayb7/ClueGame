@@ -59,13 +59,22 @@ public class IntBoard {
 	
 	public void startTargets(int index, int steps){
 		ArrayList<LinkedList<Integer>> tempAdjacencies = listOfAdjacencies;
+		
 		LinkedList<Integer> adjacentCells = tempAdjacencies.get(index);
+		//LinkedList<Integer> adjacentCells = listOfAdjacencies.get(index);
+
+		for(Integer i: adjacentCells){
+			if(visited[i]){
+				adjacentCells.remove(i);
+			}
+		}
+		
 		for (int i = 0; i < adjacentCells.size(); ++i) {
 			setVisitedTrue(adjacentCells.get(i));
 			if (steps == 1) {
 				targets.add(adjacentCells.get(i));
 			} else {
-				startTargets(index, --steps);
+				startTargets(adjacentCells.get(i), steps--);
 			}
 			setVisitedFalse(adjacentCells.get(i));
 		}
