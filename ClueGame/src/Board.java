@@ -8,6 +8,14 @@ public class Board {
 	private Map<Character, String> rooms;
 	private int numRows, numColumns;
 	
+	//Constructors	
+	public Board(){
+		//will use a known file that works for the legend and the layout
+	}
+	
+	public Board(String layoutFile, String legendFile){
+	}
+	
 	
 	//methods
 	public void loadConfigFiles(){
