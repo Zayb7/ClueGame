@@ -7,13 +7,13 @@ import org.junit.*;
 
 public class IntBoardTests {
 	//Setup board
-	IntBoard board;
+	private IntBoard board;
 	
 	@Before
 	public void setUpBoard(){
 		board = new IntBoard();
 	} 
-	
+		
 	// testing index
 	@Test
 	public void testCalcIndex(){
@@ -151,6 +151,10 @@ public class IntBoardTests {
 		Assert.assertTrue(targets.contains(15));
 		
 	}
+	
+	
+	
+	
 	
 
 }
