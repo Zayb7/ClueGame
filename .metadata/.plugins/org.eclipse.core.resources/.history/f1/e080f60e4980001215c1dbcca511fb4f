@@ -241,11 +241,6 @@ public class BoardTests {
 	// correct.
 	@Test
 	public void testRoomInitials() {
-		//setup Board and rooms
-		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-		
-		
 		assertEquals('C', board.getRoomCellAt(0, 0).getRoomInitial());
 		assertEquals('R', board.getRoomCellAt(4, 8).getRoomInitial());
 		assertEquals('B', board.getRoomCellAt(9, 0).getRoomInitial());
@@ -263,7 +258,7 @@ public class BoardTests {
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		b.loadConfigFiles();
 	}
 	
 	
@@ -272,7 +267,7 @@ public class BoardTests {
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayoutBadRoom.csv", "ClueLegend.txt");
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		b.loadConfigFiles();
 	}
 	
 	
@@ -281,7 +276,7 @@ public class BoardTests {
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		b.loadConfigFiles();
 	}
 
 }
