@@ -92,7 +92,7 @@ public class IntBoard {
 	}
 	
 	public Set getTargets(){
-		System.out.println(targets);
+		//System.out.println(targets);
 		return targets;
 	}
 	
