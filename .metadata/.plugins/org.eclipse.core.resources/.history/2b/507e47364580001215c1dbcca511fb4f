@@ -18,21 +18,21 @@ public class BoardTests {
 			board = new Board();
 	}
 
-	@Test
-	public void testCalcIndex() {
-//		assertEquals(3, board.calcIndex(0,3));
-//		assertEquals(2, board.calcIndex(0,2));
-//		assertEquals(10, board.calcIndex(2,2));
-//		assertEquals(14, board.calcIndex(3,2));
+
+private IntBoard board;
+	
+	@Before
+	public void setUpBoard(){
+		board = new IntBoard();
+	} 
 		
-		// Test each corner of the board
-		assertEquals(0, board.calcIndex(0, 0));
-		assertEquals(NUM_COLUMNS-1, board.calcIndex(0, NUM_COLUMNS-1));
-		assertEquals(483, board.calcIndex(NUM_ROWS-1, 0));
-		assertEquals(505, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
-		// Test a couple others
-		assertEquals(24, board.calcIndex(1, 1));
-		assertEquals(66, board.calcIndex(2, 20));		
+	// testing index
+	@Test
+	public void testCalcIndex(){
+		assertEquals(3, board.calcIndex(0,3));
+		assertEquals(2, board.calcIndex(0,2));
+		assertEquals(10, board.calcIndex(2,2));
+		assertEquals(14, board.calcIndex(3,2));
 	}
 	
 	//testing adjacency lists
@@ -231,6 +231,22 @@ public class BoardTests {
 		}
 		Assert.assertEquals(16, numDoors);
 	}
+
+	
+	
+	
+	@Test
+	public void testCalcIndex() {
+		// Test each corner of the board
+		assertEquals(0, board.calcIndex(0, 0));
+		assertEquals(NUM_COLUMNS-1, board.calcIndex(0, NUM_COLUMNS-1));
+		assertEquals(483, board.calcIndex(NUM_ROWS-1, 0));
+		assertEquals(505, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
+		// Test a couple others
+		assertEquals(24, board.calcIndex(1, 1));
+		assertEquals(66, board.calcIndex(2, 20));		
+	}
+	
 	
 	
 	// Test a few room cells to ensure the room initial is

@@ -8,8 +8,9 @@ public class Board {
 	private Map<Character, String> rooms;
 	private int numRows, numColumns;
 
-	private final int TOTAL_ROWS = 25;
-	private final int TOTAL_COLS = 25;
+	//variables
+	private final int TOTAL_ROWS = 4;
+	private final int TOTAL_COLS = 4;
 	private LinkedList<Integer> adjacencies;
 	ArrayList<LinkedList<Integer>> listOfAdjacencies;
 

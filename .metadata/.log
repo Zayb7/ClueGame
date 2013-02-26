@@ -668,3 +668,6 @@ Component2: Component[
 
 !ENTRY org.eclipse.ui 4 4 2013-02-26 11:40:35.779
 !MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+
+!ENTRY org.eclipse.ui 2 2 2013-02-26 11:46:34.144
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
