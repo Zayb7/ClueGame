@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 import org.junit.*;
@@ -124,8 +125,7 @@ public class BoardTests {
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
-		b.loadRoomConfig();
-		b.loadBoardConfig();
+		b.loadConfigFiles();
 	}
 	
 	
@@ -134,8 +134,7 @@ public class BoardTests {
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayoutBadRoom.csv", "ClueLegend.txt");
-		b.loadRoomConfig();
-		b.loadBoardConfig();
+		b.loadConfigFiles();
 	}
 	
 	
@@ -144,8 +143,7 @@ public class BoardTests {
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
-		b.loadRoomConfig();
-		b.loadBoardConfig();
+		b.loadConfigFiles();
 	}
 
 }

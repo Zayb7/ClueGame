@@ -19,6 +19,15 @@ public class Board {
 	
 	//methods
 	public void loadConfigFiles(){
+		loadRoomConfigFiles();
+		loadBoardConfigFiles();
+	}
+	
+	public void loadRoomConfigFiles(){
+		
+	}
+	
+	public void loadBoardConfigFiles(){
 		
 	}
 	
