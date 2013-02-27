@@ -2,7 +2,7 @@ package clueGame;
 
 public abstract class BoardCell {
 	//variables
-	private int row, col;
+	protected int row, col;
 	
 	//methods
 	public boolean isWalkway(){

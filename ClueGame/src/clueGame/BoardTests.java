@@ -1,11 +1,11 @@
 package clueGame;
+
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.util.*;
 
 import org.junit.*;
-
 
 
 
@@ -18,7 +18,7 @@ public class BoardTests {
 	
 	@Before
 	public void setUpBoard(){
-			board = new Board();
+			board = new Board("ConfigLayout.csv", "ConfigRooms.txt");	
 	}
 
 	@Test
@@ -171,18 +171,16 @@ public class BoardTests {
 	@Test
 	public void testCorrectNumOfRooms(){
 		//Testing size of Map rooms
-		
-		board.loadConfigFiles("ConfigLayout.csv", "ConfigRooms.txt");
 		testMapRooms = board.getRooms();
 		assertEquals(NUM_ROOMS, testMapRooms.size());
 	}
 	
 	@Test
 	public void testRoomCharacters(){
-		board.loadConfigFiles("ConfigLayout.csv", "ConfigRooms.txt");
 		testMapRooms = board.getRooms();
 		//test that all the room characters map to their respective room (C to 'Conservatory')
 		assertEquals("Walkway", testMapRooms.get('W'));
+		System.out.println(testMapRooms.get('W'));
 		assertEquals("Conservatory", testMapRooms.get('C'));
 		assertEquals("Billiard room", testMapRooms.get('R'));
 		assertEquals("Library", testMapRooms.get('L'));
@@ -246,28 +244,14 @@ public class BoardTests {
 	// correct.
 	@Test
 	public void testRoomInitials() {
-		//setup Board and rooms
-		Board b = new Board("ConfigLayout.csv", "ConfigRooms.txt");
-		b.loadConfigFiles("ConfigLayout.csv", "ConfigRooms.txt");
+		//setup Board and rooms		
 		
-		
-		
-//		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-//		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-		
-		assertEquals('C', board.getRoomCellAt(0, 15).getRoomInitial());
-		assertEquals('R', board.getRoomCellAt(17, 1).getRoomInitial());
-		assertEquals('B', board.getRoomCellAt(6, 23).getRoomInitial());
-		assertEquals('O', board.getRoomCellAt(22, 0).getRoomInitial());
-		assertEquals('K', board.getRoomCellAt(24, 12).getRoomInitial());
-		
-//		assertEquals('C', board.getRoomCellAt(0, 0).getRoomInitial());
-//		assertEquals('R', board.getRoomCellAt(4, 8).getRoomInitial());
-//		assertEquals('B', board.getRoomCellAt(9, 0).getRoomInitial());
-//		assertEquals('O', board.getRoomCellAt(21, 22).getRoomInitial());
-//		assertEquals('K', board.getRoomCellAt(21, 0).getRoomInitial());
+		assertEquals('L', board.getRoomCellAt(0, 0).getRoomInitial());
+		assertEquals('S', board.getRoomCellAt(4, 8).getRoomInitial());
+		assertEquals('H', board.getRoomCellAt(11, 0).getRoomInitial());
+		assertEquals('D', board.getRoomCellAt(21, 22).getRoomInitial());
+		assertEquals('O', board.getRoomCellAt(21, 0).getRoomInitial());
 	}
-	
 	
 	
 	// Test that an exception is thrown for a bad config file

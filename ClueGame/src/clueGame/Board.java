@@ -8,7 +8,7 @@ public class Board {
 
 	//variables
 	private ArrayList<BoardCell> cells = new ArrayList<BoardCell>();
-	private Map<Character, String> rooms;
+	private Map<Character, String> rooms = new HashMap<Character, String>();
 	private int numRows, numColumns;
 
 	//Board Info
@@ -124,63 +124,67 @@ public class Board {
 	}
 
 	public void loadConfigFiles(String layoutFile, String legendFile){
+		loadBoardConfigFiles(layoutFile);
 		loadRoomConfigFiles(legendFile);
-		//loadBoardConfigFiles(layoutFile);
 	}
 
 	public void loadRoomConfigFiles(String legendFile){
-		String name = "", c = "";
-		Character roomInitial;
-		rooms = new HashMap<Character, String>();
-		
 		try {
 			fileIn = new FileReader(legendFile);
 			scan = new Scanner(fileIn);
-			while(scan.hasNext()){
-				c = scan.nextLine();
-				roomInitial = c.charAt(0);
-				//System.out.println("room initial: " + roomInitial);
-				name = c.substring(3);
-				//System.out.println("Name: "+ name);
-				if(name.charAt(0) == ' ' || name.charAt(0) == ','){
-					throw new BadConfigFormatException("Room Legend Config File Error");
-				}
-				
-				rooms.put(roomInitial, name);
+			while(scan.hasNextLine()){
+				String line = scan.nextLine();
+				String[] toSplit = line.split(", ");
+				char c = toSplit[0].charAt(0);
+				rooms.put(c, toSplit[1]);
 			}
 		} catch (FileNotFoundException e) {
-			//e.printStackTrace();
-			System.err.println("FileNotFound" + e.getMessage());
-		} catch (BadConfigFormatException e){
-			System.err.println("BadConfigFormatException: "+ e.toString());
+			e.printStackTrace();
+			System.err.println("FileNotFound: "+ e.getMessage());
 		}
 	}
 
-	public void loadBoardConfigFiles(String layoutFile){
-		try{
+	public void loadBoardConfigFiles(String layoutFile) {
+		try {
 			fileIn = new FileReader(layoutFile);
 			scan = new Scanner(fileIn);
-			while(scan.hasNext()){
-				String row = scan.nextLine();
-				for(int i = 0; i < row.length(); i+=2){
-					char a = row.charAt(i);
-					BoardCell aCell; 
+			int rowCount = 0;
+			int columnCount = 0;
+			while(scan.hasNextLine()){
+				String line = scan.nextLine();
+				String[] toSplit = line.split(",");
+				for (int i = 0; i < toSplit.length; ++i) {
+					if (toSplit[i].equals("W")) {
+						WalkwayCell w = new WalkwayCell();
+						w.row = rowCount;
+						w.col = i;
+						cells.add(w);
+					} else {
+						RoomCell r = new RoomCell();
+						r.roomInitial = toSplit[i].charAt(0);
+						r.row = rowCount;
+						r.col = i;
+						cells.add(r);
+					}
 				}
+				rowCount++;
+				columnCount++;
 			}
-			
-		} catch(FileNotFoundException e){
-			//e.printStackTrace();
-			System.err.println("File Not Found: "+ e.toString());
+			this.numColumns = columnCount;
+			this.numRows = columnCount;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-	}
-	
-	public BoardCell determineTypeOfCell(char roomLetter){
-		return null;
 	}
 
 	//getters 
-	public RoomCell getRoomCellAt(int row, int col){
-		return new RoomCell();
+	public RoomCell getRoomCellAt(int row, int col) {
+		int index = calcIndex(row,col);
+		RoomCell returnRoom = new RoomCell();
+		if (cells.get(index).isRoom() == true) {
+			returnRoom = (RoomCell)cells.get(index);
+		}
+		return returnRoom;
 	}
 
 	public BoardCell getCells(int index) {
