@@ -157,25 +157,7 @@ public class Board {
 	}
 
 	public void loadBoardConfigFiles(String layoutFile){
-		try{
-			fileIn = new FileReader(layoutFile);
-			scan = new Scanner(fileIn);
-			while(scan.hasNext()){
-				String row = scan.nextLine();
-				for(int i = 0; i < row.length(); i+=2){
-					char a = row.charAt(i);
-					BoardCell aCell; 
-				}
-			}
-			
-		} catch(FileNotFoundException e){
-			//e.printStackTrace();
-			System.err.println("File Not Found: "+ e.toString());
-		}
-	}
-	
-	public BoardCell determineTypeOfCell(char roomLetter){
-		return null;
+
 	}
 
 	//getters 
