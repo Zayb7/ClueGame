@@ -12,9 +12,16 @@ public class RoomCell extends BoardCell {
 	//methods
 	@Override
 	public boolean isRoom(){
-		return true;
+		//isRoom = true;
+		return isRoom;
 	}
-
+	
+	@Override
+	public boolean isDoorway(){
+		//isDoor = true;
+		return isDoor;
+	}
+	
 	public DoorDirection getDoorDirection() {
 		return doorDirection;
 	}
@@ -22,7 +29,14 @@ public class RoomCell extends BoardCell {
 	public char getRoomInitial() {
 		return roomInitial;
 	}
+
+	public void setDoorDirection(DoorDirection doorDirection) {
+		this.doorDirection = doorDirection;
+	}
+
 	
+	
+	//setter for door direction
 	
 	
 	//@Override

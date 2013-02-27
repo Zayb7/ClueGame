@@ -1,11 +1,11 @@
 package clueGame;
 
 public class WalkwayCell extends BoardCell {
-	
+		
 	//methods
 	@Override
 	public boolean isWalkway(){
-		return true;
+		return isWalkway;
 	}
 	
 	//@Override

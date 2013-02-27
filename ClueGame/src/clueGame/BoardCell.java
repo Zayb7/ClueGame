@@ -3,6 +3,8 @@ package clueGame;
 public abstract class BoardCell {
 	//variables
 	protected int row, col;
+	protected boolean isWalkway = false;
+	protected boolean isDoor = false, isRoom = false;
 	
 	//methods
 	public boolean isWalkway(){

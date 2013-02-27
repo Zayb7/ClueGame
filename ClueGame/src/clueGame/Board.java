@@ -156,14 +156,26 @@ public class Board {
 				for (int i = 0; i < toSplit.length; ++i) {
 					if (toSplit[i].equals("W")) {
 						WalkwayCell w = new WalkwayCell();
+						//w.isWalkway();
+						w.isWalkway = true;
 						w.row = rowCount;
 						w.col = i;
 						cells.add(w);
 					} else {
 						RoomCell r = new RoomCell();
 						r.roomInitial = toSplit[i].charAt(0);
+						System.out.println(toSplit[i].length());
+						//r.isRoom();
+						r.isRoom = true;
 						r.row = rowCount;
 						r.col = i;
+						if(toSplit[i].length() >  1){
+							determineAndSetDoorwayDirection(toSplit[i].charAt(1), r);
+							//r.isDoorway();
+							r.isDoor = true;
+						} else{
+							r.setDoorDirection(RoomCell.DoorDirection.NONE);
+						}
 						cells.add(r);
 					}
 				}
@@ -176,7 +188,24 @@ public class Board {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
+	//helper function for loadBoardConfigFiles function
+	public void determineAndSetDoorwayDirection(char aLetter, RoomCell aCell){
+		switch(aLetter){
+			case 'R': aCell.setDoorDirection(RoomCell.DoorDirection.RIGHT);
+					  break;
+			case 'L': aCell.setDoorDirection(RoomCell.DoorDirection.LEFT);
+					  break;
+			case 'D': aCell.setDoorDirection(RoomCell.DoorDirection.DOWN);
+					  break;
+			case 'U': aCell.setDoorDirection(RoomCell.DoorDirection.UP);
+			          break;
+		}	
+		
+	}
+	
+	
 	//getters 
 	public RoomCell getRoomCellAt(int row, int col) {
 		int index = calcIndex(row,col);
@@ -188,8 +217,7 @@ public class Board {
 	}
 
 	public BoardCell getCells(int index) {
-		//return cells.get(index);
-		return null;
+		return cells.get(index);
 	}
 
 	public Map<Character, String> getRooms() {

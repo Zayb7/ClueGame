@@ -15,10 +15,12 @@ public class BoardTests {
 	private final int NUM_ROWS =25,  NUM_COLUMNS = 25;
 	private Board board;
 	private Map<Character, String> testMapRooms;
+	private final String layoutName = "ConfigLayout.csv";
+	private final String legendName = "ConfigRooms.txt";
 	
 	@Before
 	public void setUpBoard(){
-			board = new Board("ConfigLayout.csv", "ConfigRooms.txt");	
+		board = new Board(layoutName, legendName);	
 	}
 
 	@Test
@@ -202,6 +204,7 @@ public class BoardTests {
 	@Test
 	public void FourDoorDirections() {
 		// Test one each RIGHT/LEFT/UP/DOWN
+		
 		RoomCell room = board.getRoomCellAt(3, 3);
 		System.out.println(room.isDoorway());
 		assertTrue(room.isDoorway());
@@ -230,7 +233,7 @@ public class BoardTests {
 	{
 		int numDoors = 0;
 		int totalCells = board.getNumColumns() * board.getNumRows();
-		Assert.assertEquals(506, totalCells);
+		Assert.assertEquals(625, totalCells);
 		for (int i=0; i<totalCells; i++)
 		{
 			BoardCell cell = board.getCells(i);
