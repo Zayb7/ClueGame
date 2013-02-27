@@ -247,25 +247,15 @@ public class BoardTests {
 	@Test
 	public void testRoomInitials() {
 		//setup Board and rooms
-		Board b = new Board("ConfigLayout.csv", "ConfigRooms.txt");
-		b.loadConfigFiles("ConfigLayout.csv", "ConfigRooms.txt");
+		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 		
-		
-		
-//		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-//		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 		
 		assertEquals('C', board.getRoomCellAt(0, 15).getRoomInitial());
 		assertEquals('R', board.getRoomCellAt(17, 1).getRoomInitial());
 		assertEquals('B', board.getRoomCellAt(6, 23).getRoomInitial());
 		assertEquals('O', board.getRoomCellAt(22, 0).getRoomInitial());
 		assertEquals('K', board.getRoomCellAt(24, 12).getRoomInitial());
-		
-//		assertEquals('C', board.getRoomCellAt(0, 0).getRoomInitial());
-//		assertEquals('R', board.getRoomCellAt(4, 8).getRoomInitial());
-//		assertEquals('B', board.getRoomCellAt(9, 0).getRoomInitial());
-//		assertEquals('O', board.getRoomCellAt(21, 22).getRoomInitial());
-//		assertEquals('K', board.getRoomCellAt(21, 0).getRoomInitial());
 	}
 	
 	

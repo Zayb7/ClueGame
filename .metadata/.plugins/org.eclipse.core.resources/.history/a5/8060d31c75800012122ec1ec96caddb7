@@ -247,13 +247,8 @@ public class BoardTests {
 	@Test
 	public void testRoomInitials() {
 		//setup Board and rooms
-		Board b = new Board("ConfigLayout.csv", "ConfigRooms.txt");
-		b.loadConfigFiles("ConfigLayout.csv", "ConfigRooms.txt");
-		
-		
-		
-//		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-//		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		Board b = new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
+		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 		
 		assertEquals('C', board.getRoomCellAt(0, 15).getRoomInitial());
 		assertEquals('R', board.getRoomCellAt(17, 1).getRoomInitial());
