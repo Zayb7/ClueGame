@@ -125,21 +125,34 @@ public class Board {
 
 	public void loadConfigFiles(String layoutFile, String legendFile){
 		loadRoomConfigFiles(legendFile);
-		loadBoardConfigFiles(layoutFile);
+		//loadBoardConfigFiles(layoutFile);
 	}
 
 	public void loadRoomConfigFiles(String legendFile){
+		String name = "", c = "";
+		Character roomInitial;
+		rooms = new HashMap<Character, String>();
+		
 		try {
 			fileIn = new FileReader(legendFile);
 			scan = new Scanner(fileIn);
 			while(scan.hasNext()){
-				String c = scan.nextLine();
-				System.out.println(c);
-				char character = c.charAt(0);
+				c = scan.nextLine();
+				roomInitial = c.charAt(0);
+				//System.out.println("room initial: " + roomInitial);
+				name = c.substring(3);
+				//System.out.println("Name: "+ name);
+				if(name.charAt(0) == ' ' || name.charAt(0) == ','){
+					throw new BadConfigFormatException("Room Legend Config File Error");
+				}
+				
+				rooms.put(roomInitial, name);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println("FileNotFound" + e.getMessage());
+		} catch (BadConfigFormatException e){
+			System.err.println("BadConfigFormatException: "+ e.toString());
 		}
 	}
 
