@@ -8,7 +8,7 @@ public class RoomCell extends BoardCell {
 	//variables
 	private DoorDirection doorDirection;
 	char roomInitial;
-		
+	
 	//methods
 	@Override
 	public boolean isRoom(){

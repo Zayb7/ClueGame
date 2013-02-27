@@ -203,7 +203,6 @@ public class BoardTests {
 	public void FourDoorDirections() {
 		// Test one each RIGHT/LEFT/UP/DOWN
 		RoomCell room = board.getRoomCellAt(3, 3);
-		System.out.println(room.isDoorway());
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
 		room = board.getRoomCellAt(2, 10);
