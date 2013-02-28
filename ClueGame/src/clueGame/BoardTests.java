@@ -232,7 +232,7 @@ public class BoardTests {
 		int numDoors = 0;
 		int totalCells = board.getNumColumns() * board.getNumRows();
 		Assert.assertEquals(625, totalCells);
-		System.out.println(board.getCells(625));
+		//System.out.println(board.getCells(625));
 		for (int i=0; i < totalCells; i++)
 		{
 			BoardCell cell = board.getCells(i);
