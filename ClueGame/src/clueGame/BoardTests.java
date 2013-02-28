@@ -15,12 +15,10 @@ public class BoardTests {
 	private final int NUM_ROWS =25,  NUM_COLUMNS = 25;
 	private Board board;
 	private Map<Character, String> testMapRooms;
-	private final String layoutName = "ConfigLayout.csv";
-	private final String legendName = "ConfigRooms.txt";
 	
 	@Before
-	public void setUpBoard(){
-		board = new Board(layoutName, legendName);	
+	public void setUpBoard() throws BadConfigFormatException, FileNotFoundException {
+		board = new Board("ConfigLayout.csv", "ConfigRooms.txt");	
 	}
 
 	@Test
@@ -234,7 +232,8 @@ public class BoardTests {
 		int numDoors = 0;
 		int totalCells = board.getNumColumns() * board.getNumRows();
 		Assert.assertEquals(625, totalCells);
-		for (int i=0; i<totalCells; i++)
+		System.out.println(board.getCells(625));
+		for (int i=0; i < totalCells; i++)
 		{
 			BoardCell cell = board.getCells(i);
 			if (cell.isDoorway())
@@ -266,16 +265,14 @@ public class BoardTests {
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 	}
 	
 	
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadRoom() throws FileNotFoundException, BadConfigFormatException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayoutBadRoom.csv", "ClueLegend.txt");
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 	}
 	
 	
@@ -284,7 +281,6 @@ public class BoardTests {
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		Board b = new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
-		b.loadConfigFiles("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 	}
 
 }
