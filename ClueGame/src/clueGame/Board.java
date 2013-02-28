@@ -90,14 +90,12 @@ public class Board {
 
 
 		for(Integer i: adjacentCells){
-			//System.out.println(i);
 			if(!visited[i]){
 				adjacentCellsTemp.add(i);
 			} 
 		}
 
 		for (Integer i: adjacentCellsTemp) {
-			//System.out.println(i);
 			setVisitedTrue(i);
 			if (steps == 1) {
 				targets.add(i);
@@ -110,7 +108,6 @@ public class Board {
 	}
 
 	public Set getTargets(){
-		//System.out.println(targets);
 		return targets;
 	}
 
@@ -134,7 +131,7 @@ public class Board {
 		while(scan.hasNextLine()){
 			String line = scan.nextLine();
 			String[] toSplit = line.split(", ");
-			if (toSplit.length > 2) throw new BadConfigFormatException(legendFile);
+			if (toSplit.length > 2 || toSplit.length < 0) throw new BadConfigFormatException(legendFile);
 			else {
 				char c = toSplit[0].charAt(0);
 				rooms.put(c, toSplit[1]);
@@ -149,13 +146,17 @@ public class Board {
 			int rowCount = 0;
 			int columnCount = 0;
 			int badColumnCheck = 0;
+			boolean firstrun = true;
 			 while(scan.hasNextLine()) {
 				 String line = scan.nextLine();
 				 String[] toSplit = line.split(",");
-				 badColumnCheck = toSplit.length;
+				 if (firstrun == true) {
+					 badColumnCheck = toSplit.length;
+				 }
+				 firstrun = false;
 				 if (toSplit.length != badColumnCheck) {
 						throw new BadConfigFormatException(layoutFile);
-					} else badColumnCheck = toSplit.length;
+				} else badColumnCheck = toSplit.length;
 				for (int i = 0; i < toSplit.length; ++i) {
 					if (toSplit[i].equals("W")) {
 						WalkwayCell w = new WalkwayCell();
@@ -169,7 +170,6 @@ public class Board {
 						if (!rooms.containsKey(r.roomInitial)) {
 							throw new BadConfigFormatException(layoutFile);
 						}
-						System.out.println(toSplit[i].length());
 						r.isRoom = true;
 						r.row = rowCount;
 						r.col = i;
