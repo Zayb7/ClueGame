@@ -147,11 +147,15 @@ public class Board {
 			fileIn = new FileReader(layoutFile);
 			scan = new Scanner(fileIn);
 			int rowCount = 0;
-			int columnCount = 1;
-			String line = scan.nextLine();
-			String[] toSplit = line.split(",");
-			int badColumnCheck = toSplit.length;
-			while(scan.hasNextLine()) {
+			int columnCount = 0;
+			int badColumnCheck = 0;
+			 while(scan.hasNextLine()) {
+				 String line = scan.nextLine();
+				 String[] toSplit = line.split(",");
+				 badColumnCheck = toSplit.length;
+				 if (toSplit.length != badColumnCheck) {
+						throw new BadConfigFormatException(layoutFile);
+					} else badColumnCheck = toSplit.length;
 				for (int i = 0; i < toSplit.length; ++i) {
 					if (toSplit[i].equals("W")) {
 						WalkwayCell w = new WalkwayCell();
@@ -180,11 +184,9 @@ public class Board {
 				} 
 				rowCount++;
 				columnCount++;
-				line = scan.nextLine();
-				toSplit = line.split(",");
-				if (toSplit.length != badColumnCheck) {
-					throw new BadConfigFormatException(layoutFile);
-				} else badColumnCheck = toSplit.length;
+//				line = scan.nextLine();
+//				toSplit = line.split(",");
+				
 			}
 			this.numColumns = columnCount;
 			this.numRows = columnCount;
