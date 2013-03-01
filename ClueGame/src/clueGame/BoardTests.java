@@ -19,7 +19,7 @@ public class BoardTests {
 	@Before
 	public void setUpBoard() throws BadConfigFormatException, FileNotFoundException {
 		board = new Board("ConfigLayout.csv", "ConfigRooms.txt");	
-		//board.calcAdjacencies();
+		board.calcAdjacencies();
 	}
 
 	//TESTS FOR ROOMS AND BOARD 

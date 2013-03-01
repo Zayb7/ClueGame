@@ -41,6 +41,7 @@ public class Board {
 		for(int i = 0; i < numRows; ++i) {
 			for (int j = 0; j < numColumns; ++j) {
 				adjacencies = new LinkedList<BoardCell>();
+				int index = calcIndex();
 				if (i-1 >= 0) {
 					int xminus1 = calcIndex(i-1, j);
 					adjacencies.add(xminus1);
@@ -88,21 +89,24 @@ public class Board {
 		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
 		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
 
+		int j = 0;
 		for(BoardCell i: adjacentCells){
-			if(!visited[i]){
+			if(!visited[j]){
 				adjacentCellsTemp.add(i);
 			} 
+			++j;
 		}
-
+		j = 0;
 		for (BoardCell i: adjacentCellsTemp) {
-			setVisitedTrue(i);
+			setVisitedTrue(j);
 			if (steps == 1) {
 				targets.add(i);
 			} else {
-				calcTargets(i, steps - 1);
+				calcTargets(j, steps - 1);
 			}
 
-			setVisitedFalse(i);
+			setVisitedFalse(j);
+			++j;
 		}
 	}
 
