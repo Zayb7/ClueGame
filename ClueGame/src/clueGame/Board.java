@@ -14,8 +14,8 @@ public class Board {
 	//Board Info
 //	private final int numRows = 25;
 //	private final int numColumns = 25;
-	private LinkedList<Integer> adjacencies;
-	private ArrayList<LinkedList<Integer>> listOfAdjacencies;
+	private LinkedList<BoardCell> adjacencies;
+	private ArrayList<LinkedList<BoardCell>> listOfAdjacencies;
 	
 	//Scanner and File IO
 	private Scanner scan;
@@ -40,7 +40,7 @@ public class Board {
 	public void calcAdjacencies(){
 		for(int i = 0; i < numRows; ++i) {
 			for (int j = 0; j < numColumns; ++j) {
-				adjacencies = new LinkedList<Integer>();
+				adjacencies = new LinkedList<BoardCell>();
 				if (i-1 >= 0) {
 					int xminus1 = calcIndex(i-1, j);
 					adjacencies.add(xminus1);
@@ -62,8 +62,8 @@ public class Board {
 		}
 	}
 
-	public LinkedList<Integer> getAdjList(int index){
-		listOfAdjacencies = new ArrayList<LinkedList<Integer>>();
+	public LinkedList<BoardCell> getAdjList(int index){
+		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
 		calcAdjacencies();
 		return listOfAdjacencies.get(index);
 	}
@@ -78,24 +78,23 @@ public class Board {
 
 	public void startTargets(int index, int steps){
 		Arrays.fill(visited, false);
-		targets = new HashSet<Integer>();
+		targets = new HashSet<BoardCell>();
 		visited[index] = true;
 		calcTargets(index, steps);
 	}
 
 	public void calcTargets(int thisCell, int steps){	
-		ArrayList<LinkedList<Integer>> tempAdjacencies = listOfAdjacencies;
-		LinkedList<Integer> adjacentCells = tempAdjacencies.get(thisCell);
-		LinkedList<Integer> adjacentCellsTemp = new LinkedList<Integer>();
+		ArrayList<LinkedList<BoardCell>> tempAdjacencies = listOfAdjacencies;
+		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
+		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
 
-
-		for(Integer i: adjacentCells){
+		for(BoardCell i: adjacentCells){
 			if(!visited[i]){
 				adjacentCellsTemp.add(i);
 			} 
 		}
 
-		for (Integer i: adjacentCellsTemp) {
+		for (BoardCell i: adjacentCellsTemp) {
 			setVisitedTrue(i);
 			if (steps == 1) {
 				targets.add(i);
