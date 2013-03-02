@@ -62,6 +62,29 @@ public class Board {
 		}
 		
 	}
+	
+	//helper method for calc adjacency, only checks for rooms
+	public boolean adjacencyIsInvalid(int currentIndex, int index){
+		
+		if(cells.get(currentIndex).isRoom()){
+			if(cells.get(currentIndex).isDoorway())
+			{
+				return true;
+			} 
+			if(cells.get(currentIndex).isWalkway()){
+				return false;
+			}
+		} 
+		
+		if(cells.get(currentIndex).isWalkway()){
+			if(cells.get(currentIndex).isRoom()){
+				return false;
+			} 
+		} 
+		
+		
+		return true;
+	} 
 
 	public LinkedList<BoardCell> getAdjList(int index){
 		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
