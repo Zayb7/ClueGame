@@ -424,8 +424,9 @@ public class BoardTests {
 	@Test
 	public void testRoomExit()
 	{
+		board.calcAdjacencies();
 		// Take one step, essentially just the adj list
-		board.calcTargets(board.calcIndex(4,20), 1);
+		board.startTargets(board.calcIndex(4,20), 1);
 		Set<BoardCell> targets= board.getTargets();
 		// Ensure doesn't exit through the wall
 		Assert.assertEquals(1, targets.size());

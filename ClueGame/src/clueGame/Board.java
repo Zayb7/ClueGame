@@ -22,7 +22,7 @@ public class Board {
 	private FileReader fileIn;
 	
 
-	boolean [] visited = new boolean[numRows*numColumns];
+	boolean [] visited;
 	Set targets = new HashSet<Integer>();
 
 
@@ -38,6 +38,7 @@ public class Board {
 
 	//methods
 	public void calcAdjacencies(){
+		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
 		for(int i = 0; i < numRows; ++i) {
 			for (int j = 0; j < numColumns; ++j) {
 				adjacencies = new LinkedList<BoardCell>(); 
@@ -101,6 +102,7 @@ public class Board {
 	}
 
 	public void startTargets(int index, int steps){
+		visited = new boolean[numRows*numColumns];
 		Arrays.fill(visited, false);
 		targets = new HashSet<BoardCell>();
 		visited[index] = true;
@@ -111,11 +113,12 @@ public class Board {
 		ArrayList<LinkedList<BoardCell>> tempAdjacencies = listOfAdjacencies;
 		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
 		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
-
 		int j = 0;
 		for(BoardCell i: adjacentCells){
 			if(!visited[j]){
-				adjacentCellsTemp.add(i);
+				if (this.getRoomCellAt(i.row, i.col).isDoorway()) {
+					adjacentCellsTemp.add(i);
+				}
 			} 
 			++j;
 		}
