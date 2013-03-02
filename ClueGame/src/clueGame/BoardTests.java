@@ -183,19 +183,19 @@ public class BoardTests {
 		// TEST DOORWAY RIGHT-D4
 		LinkedList<BoardCell> testList = board.getAdjList(board.calcIndex(4, 3));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.calcIndex(4, 4)));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(4, 4))));
 		// TEST DOORWAY LEFT-S18 
 		testList = board.getAdjList(board.calcIndex(16, 18));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.calcIndex(16, 17)));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(16, 17))));
 		//TEST DOORWAY DOWN-P4
 		testList = board.getAdjList(board.calcIndex(3, 15));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.calcIndex(4, 15)));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(4, 15))));
 		//TEST DOORWAY UP-M20
 		testList = board.getAdjList(board.calcIndex(19, 12));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.calcIndex(20, 12)));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(20, 12))));
 
 	}
 
