@@ -134,12 +134,13 @@ public class Board {
 		int j = 0;
 		for(BoardCell i: adjacentCells){
 			if(!visited[j]){
-				if (this.getRoomCellAt(i.row, i.col).isDoorway()) {
+				if(targetIsValid(thisCell, calcIndex(i.row, i.col))){
 					adjacentCellsTemp.add(i);
 				}
 			} 
 			++j;
 		}
+		
 		j = 0;
 		for (BoardCell i: adjacentCellsTemp) {
 			setVisitedTrue(j);
@@ -148,12 +149,35 @@ public class Board {
 			} else {
 				calcTargets(j, steps - 1);
 			}
-
 			setVisitedFalse(j);
 			++j;
 		}
 	}
 
+	//helper function for calcTargets
+	public boolean targetIsValid(int currentIndex, int index){
+		//for walkway
+		if(getCells(currentIndex).isWalkway()){
+			if(getCells(index).isRoom() && getCells(index).isDoorway()){
+				return true;
+			} else if(getCells(index).isWalkway()){
+				return true;
+			} else{
+				return false;
+			}
+		}
+		
+		//for room
+		if(getCells(currentIndex).isRoom() && getCells(currentIndex).isDoorway()){
+			if(getCells(index).isWalkway()){
+				return true;
+			} else{
+				return false;
+			}
+		}
+		return false;
+	}
+	
 	public Set getTargets(){
 		return targets;
 	}
