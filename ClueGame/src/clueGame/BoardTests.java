@@ -181,9 +181,9 @@ public class BoardTests {
 	public void testAdjacencyRoomExit()
 	{
 		// TEST DOORWAY RIGHT-D4
-		LinkedList<BoardCell> testList = board.getAdjList(board.calcIndex(4, 3));
+		LinkedList<BoardCell> testList = board.getAdjList(board.calcIndex(3, 3));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(4, 4))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(3, 4))));
 		// TEST DOORWAY LEFT-S18 
 		testList = board.getAdjList(board.calcIndex(16, 18));
 		Assert.assertEquals(1, testList.size());
@@ -195,7 +195,7 @@ public class BoardTests {
 		//TEST DOORWAY UP-M20
 		testList = board.getAdjList(board.calcIndex(19, 12));
 		Assert.assertEquals(1, testList.size());
-		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(20, 12))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(18, 12))));
 
 	}
 
@@ -420,23 +420,4 @@ public class BoardTests {
 
 	}
 
-	// Test getting out of a room
-	@Test
-	public void testRoomExit()
-	{
-		board.calcAdjacencies();
-		// Take one step, essentially just the adj list
-		board.startTargets(board.calcIndex(4,20), 1);
-		Set<BoardCell> targets= board.getTargets();
-		// Ensure doesn't exit through the wall
-		Assert.assertEquals(1, targets.size());
-		Assert.assertTrue(targets.contains(board.getRoomCellAt(4, 19)));
-		// Take two steps
-		board.calcTargets(board.calcIndex(4, 20), 2);
-		targets= board.getTargets();
-		Assert.assertEquals(3, targets.size());
-		Assert.assertTrue(targets.contains(board.getRoomCellAt(3, 19)));
-		Assert.assertTrue(targets.contains(board.getRoomCellAt(5, 19)));
-		Assert.assertTrue(targets.contains(board.getRoomCellAt(4, 18)));
-	}
 }

@@ -41,22 +41,31 @@ public class Board {
 		listOfAdjacencies = new ArrayList<LinkedList<BoardCell>>();
 		for(int i = 0; i < numRows; ++i) {
 			for (int j = 0; j < numColumns; ++j) {
+				int currentIndex = calcIndex(i,j);
 				adjacencies = new LinkedList<BoardCell>(); 
 				if (i-1 >= 0) {
 					int xminus1 = calcIndex(i-1, j);
-					adjacencies.add(cells.get(xminus1));
+					if(adjacencyIsValid(currentIndex, xminus1)){
+						adjacencies.add(cells.get(xminus1));
+					}
 				}
 				if (j-1 >= 0) {
 					int yminus1 = calcIndex(i, j-1);
-					adjacencies.add(cells.get(yminus1));
+					if(adjacencyIsValid(currentIndex, yminus1)){
+						adjacencies.add(cells.get(yminus1));
+					}
 				}
 				if (i+1 < numRows) {
 					int xplus1 = calcIndex(i+1, j);
-					adjacencies.add(cells.get(xplus1));
+					if(adjacencyIsValid(currentIndex, xplus1)){
+						adjacencies.add(cells.get(xplus1));
+					}
 				}
 				if (j+1 < numColumns) {
 					int yplus1 = calcIndex(i, j+1);
-					adjacencies.add(cells.get(yplus1));
+					if(adjacencyIsValid(currentIndex, yplus1)){
+						adjacencies.add(cells.get(yplus1));
+					}
 				}
 				listOfAdjacencies.add(adjacencies);
 			}
@@ -65,25 +74,34 @@ public class Board {
 	}
 	
 	//helper method for calc adjacency, only checks for rooms
-	public boolean adjacencyIsInvalid(int currentIndex, int index){
+	public boolean adjacencyIsValid(int currentIndex, int index){
 		
 		if(cells.get(currentIndex).isRoom()){
-			if(cells.get(currentIndex).isDoorway())
-			{
-				return true;
-			} 
-			if(cells.get(currentIndex).isWalkway()){
+			if(cells.get(currentIndex).isDoorway()){
+				if(cells.get(index).isWalkway()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			} else{
 				return false;
 			}
+			
 		} 
 		
-		if(cells.get(currentIndex).isWalkway()){
-			if(cells.get(currentIndex).isRoom()){
-				return false;
-			} 
-		} 
-		
-		
+		else if(cells.get(currentIndex).isWalkway()){
+			if(cells.get(index).isRoom()){
+				if(cells.get(index).isDoorway()){
+					return true;
+				} else{
+					return false;
+				}
+			} else{
+				return true;
+			}
+		}
+				
 		return true;
 	} 
 
