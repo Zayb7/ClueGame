@@ -119,64 +119,93 @@ public class Board {
 		visited[index] = false;
 	}
 
-	public void startTargets(int index, int steps){
-		visited = new boolean[numRows*numColumns];
-		Arrays.fill(visited, false);
-		targets = new HashSet<BoardCell>();
-		visited[index] = true;
-		calcTargets(index, steps);
+//	public void startTargets(int index, int steps){
+//		visited = new boolean[numRows*numColumns];
+//		Arrays.fill(visited, false);
+//		targets = new HashSet<BoardCell>();
+//		visited[index] = true;
+//		calcTargets(index, steps);
+//	}
+//
+//	public void calcTargets(int thisCell, int steps){	
+//		ArrayList<LinkedList<BoardCell>> tempAdjacencies = listOfAdjacencies;
+//		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
+//		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
+//		int j = 0;
+//		for(BoardCell i: adjacentCells){
+//			if(!visited[j]){
+//				if(targetIsValid(thisCell, calcIndex(i.row, i.col))){
+//					adjacentCellsTemp.add(i);
+//				}
+//			} 
+//			++j;
+//		}
+//		
+//		j = 0;
+//		for (BoardCell i: adjacentCellsTemp) {
+//			setVisitedTrue(j);
+//			if (steps == 1) {
+//				targets.add(i);
+//			} else {
+//				calcTargets(j, steps - 1);
+//			}
+//			setVisitedFalse(j);
+//			++j;
+//		}
+//	}
+//
+//	//helper function for calcTargets
+//	public boolean targetIsValid(int currentIndex, int index){
+//		//for walkway
+//		if(getCells(currentIndex).isWalkway()){
+//			if(getCells(index).isRoom() && getCells(index).isDoorway()){
+//				return true;
+//			} else if(getCells(index).isWalkway()){
+//				return true;
+//			} else{
+//				return false;
+//			}
+//		}
+//		
+//		//for room
+//		if(getCells(currentIndex).isRoom() && getCells(currentIndex).isDoorway()){
+//			if(getCells(index).isWalkway()){
+//				return true;
+//			} else{
+//				return false;
+//			}
+//		}
+//		return false;
+//	}
+	
+	public void startTargets(int start, int steps) {
+		targets.clear();
+		calcTargets2(start, steps, new ArrayList<Integer>());
 	}
-
-	public void calcTargets(int thisCell, int steps){	
-		ArrayList<LinkedList<BoardCell>> tempAdjacencies = listOfAdjacencies;
-		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
-		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
-		int j = 0;
-		for(BoardCell i: adjacentCells){
-			if(!visited[j]){
-				if(targetIsValid(thisCell, calcIndex(i.row, i.col))){
-					adjacentCellsTemp.add(i);
+ 
+	public void calcTargets2(int start, int steps, ArrayList<Integer> visited) {
+		visited.add(start);
+		if(steps > 1) {
+			for(BoardCell i : listOfAdjacencies.get(start)) {
+				if(!visited.contains(calcIndex(i.row,i.col))) {
+					if(getCells(calcIndex(i.row,i.col)).isDoorway()) {
+						targets.add(getCells(calcIndex(i.row,i.col)));
+						continue;
+					}
+					ArrayList<Integer> newVisited = (ArrayList<Integer>) visited.clone();
+					calcTargets2(calcIndex(i.row, i.col), steps - 1, newVisited);
 				}
-			} 
-			++j;
-		}
-		
-		j = 0;
-		for (BoardCell i: adjacentCellsTemp) {
-			setVisitedTrue(j);
-			if (steps == 1) {
-				targets.add(i);
-			} else {
-				calcTargets(j, steps - 1);
 			}
-			setVisitedFalse(j);
-			++j;
+		}
+		else if(steps == 1) {
+			for(BoardCell i : listOfAdjacencies.get(start)) {
+				BoardCell boardCell = getCells(calcIndex(i.row,i.col));
+				if(!visited.contains(calcIndex(i.row,i.col)))
+					targets.add(boardCell);
+			}
 		}
 	}
-
-	//helper function for calcTargets
-	public boolean targetIsValid(int currentIndex, int index){
-		//for walkway
-		if(getCells(currentIndex).isWalkway()){
-			if(getCells(index).isRoom() && getCells(index).isDoorway()){
-				return true;
-			} else if(getCells(index).isWalkway()){
-				return true;
-			} else{
-				return false;
-			}
-		}
-		
-		//for room
-		if(getCells(currentIndex).isRoom() && getCells(currentIndex).isDoorway()){
-			if(getCells(index).isWalkway()){
-				return true;
-			} else{
-				return false;
-			}
-		}
-		return false;
-	}
+	
 	
 	public Set getTargets(){
 		return targets;
