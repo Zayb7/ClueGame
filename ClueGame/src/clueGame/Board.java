@@ -127,7 +127,7 @@ public class Board {
 		calcTargets(index, steps);
 	}
 
-	public void calcTargets(BoardCell thisCell, int steps){	
+	public void calcTargets(int thisCell, int steps){	
 		ArrayList<LinkedList<BoardCell>> tempAdjacencies = listOfAdjacencies;
 		LinkedList<BoardCell> adjacentCells = tempAdjacencies.get(thisCell);
 		LinkedList<BoardCell> adjacentCellsTemp = new LinkedList<BoardCell>();
