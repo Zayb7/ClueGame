@@ -235,50 +235,68 @@ public class BoardTests {
 	@Test
 	public void testAdjacencyWalkways()
 	{
-		// Test on top edge of board, just one walkway piece
-		LinkedList<BoardCell> testList = board.getAdjList(board.calcIndex(0, 4));
-		Assert.assertTrue(testList.contains(5));
-		Assert.assertEquals(1, testList.size());
-
-		// Test on left edge of board, three walkway pieces
-		testList = board.getAdjList(board.calcIndex(6, 0));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 0)));
-		Assert.assertTrue(testList.contains(board.calcIndex(6, 1)));
-		Assert.assertTrue(testList.contains(board.calcIndex(7, 0)));
+		// Test on top edge of board, four walkway pieces F1
+		LinkedList<BoardCell> testList = board.getAdjList(board.calcIndex(0, 5));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(0, 4))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(0, 6))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(1,5))));
 		Assert.assertEquals(3, testList.size());
 
+		// Test on left edge of board, two walkway pieces A20
+		testList = board.getAdjList(board.calcIndex(19, 0));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(19, 1))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(20, 0))));
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(18,0))));
+		Assert.assertEquals(2, testList.size());
+
 		// Test between two rooms, walkways right and left
-		testList = board.getAdjList(board.calcIndex(6, 21));
-		Assert.assertTrue(testList.contains(board.calcIndex(6, 20)));
-		Assert.assertTrue(testList.contains(board.calcIndex(6, 22)));
-		Assert.assertEquals(2, testList.size());
+//		testList = board.getAdjList(board.calcIndex(6, 21));
+//		Assert.assertTrue(testList.contains(board.calcIndex(6, 20)));
+//		Assert.assertTrue(testList.contains(board.calcIndex(6, 22)));
+//		Assert.assertEquals(2, testList.size());
 
-		// Test surrounded by 4 walkways
-		testList = board.getAdjList(board.calcIndex(15,7));
-		Assert.assertTrue(testList.contains(board.calcIndex(15, 8)));
-		Assert.assertTrue(testList.contains(board.calcIndex(15, 6)));
-		Assert.assertTrue(testList.contains(board.calcIndex(14, 7)));
-		Assert.assertTrue(testList.contains(board.calcIndex(16, 7)));
+		// Test surrounded by 4 walkways J18
+		testList = board.getAdjList(board.calcIndex(17, 9));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(16, 9))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(18, 9))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(17, 8))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(17, 10))));
 		Assert.assertEquals(4, testList.size());
+		
+		//Q13 
+		testList = board.getAdjList(board.calcIndex(12, 16));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(11, 16))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(13, 16))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(12, 15))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(12, 17))));
+		Assert.assertEquals(4, testList.size());
+		
 
-		// Test on bottom edge of board, next to 1 room piece
-		testList = board.getAdjList(board.calcIndex(21, 15));
-		Assert.assertTrue(testList.contains(board.calcIndex(21, 16)));
-		Assert.assertTrue(testList.contains(board.calcIndex(20, 15)));
+		// Test on bottom edge of board, next to 1 room and 2 walkway Q24
+		testList = board.getAdjList(board.calcIndex(24, 16));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(23, 16))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(24, 17))));
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(24, 15))));
 		Assert.assertEquals(2, testList.size());
 
-		// Test on right edge of board, next to 1 room piece
-		testList = board.getAdjList(board.calcIndex(14, 22));
-		Assert.assertTrue(testList.contains(board.calcIndex(14, 21)));
-		Assert.assertTrue(testList.contains(board.calcIndex(13, 22)));
+		// Test on right edge of board, next to 1 room piece and 2 walkway Y15
+		testList = board.getAdjList(board.calcIndex(14, 24));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(13, 24))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(14, 23))));
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(15, 24))));
 		Assert.assertEquals(2, testList.size());
 
 		// Test on walkway next to  door that is not in the needed
-		// direction to enter
-		testList = board.getAdjList(board.calcIndex(5, 3));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 2)));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 4)));
-		Assert.assertTrue(testList.contains(board.calcIndex(6, 3)));
+		// direction to enter, contains 3 walkway, NOT 1 door B13 or 2 rooms
+		testList = board.getAdjList(board.calcIndex(13, 2));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(14, 2))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(13, 3))));
+		Assert.assertTrue(testList.contains(board.getCells(board.calcIndex(13, 1))));
+		//checking door is not included
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(12,1))));
+		//checking rooms
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(12, 2))));
+		Assert.assertFalse(testList.contains(board.getCells(board.calcIndex(12, 3))));
 		Assert.assertEquals(3, testList.size());
 	}
 
