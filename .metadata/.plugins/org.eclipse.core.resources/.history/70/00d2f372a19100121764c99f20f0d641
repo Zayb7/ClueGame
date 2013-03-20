@@ -1,7 +1,11 @@
 package clueGame;
 
+<<<<<<< HEAD
 public class Card {
 
+=======
+public class Card {
+>>>>>>> 27c7f0410ecbf4f20880cee723d0743a86cafe98
 	public enum CardType {PERSON, ROOM, WEAPON};
 	
 	public Card(String cardName, CardType cardType) {

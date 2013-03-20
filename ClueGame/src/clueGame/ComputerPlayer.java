@@ -11,4 +11,8 @@ public class ComputerPlayer extends Player {
 		return index;
 	}
 
+	public Card disproveSuggestion(Card peacockCard, Card studyCard, Card wrenchCard) {
+		return null;
+	}
+
 }
