@@ -329,7 +329,6 @@ public class BoardTests {
 		board.startTargets(board.calcIndex(13, 19), 2);
 		Set<BoardCell> targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
-		System.out.println(targets);
 		Assert.assertTrue(targets.contains(board.getCells(board.calcIndex(13, 17)))); 
 		Assert.assertTrue(targets.contains(board.getCells(board.calcIndex(13, 21))));
 		Assert.assertTrue(targets.contains(board.getCells(board.calcIndex(12, 18))));
