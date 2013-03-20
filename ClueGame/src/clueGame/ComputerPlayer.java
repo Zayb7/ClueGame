@@ -6,4 +6,8 @@ public class ComputerPlayer {
 		
 	}
 
+	public Card disproveSuggestion(Card peacockCard, Card studyCard, Card wrenchCard) {
+		return null;
+	}
+
 }

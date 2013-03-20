@@ -6,4 +6,8 @@ public class Card {
 	public Card(String cardName, CardType cardType) {
 		
 	}
+
+	public String getCardName() {
+		return null;
+	}
 }
