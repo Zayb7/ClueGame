@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Player {
@@ -7,7 +8,7 @@ public class Player {
 	protected String name;
 	protected ArrayList cards;
 
-	public Player(){
+	public Player() {
 		
 		
 	}

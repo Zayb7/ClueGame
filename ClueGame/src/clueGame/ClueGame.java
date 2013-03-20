@@ -20,7 +20,11 @@ public class ClueGame {
 	public Player getHuman() {
 		return null;
 	}
-
+	
+	public void Deal() {
+		
+	}
+	
 	public boolean checkAccusation(Card mustardCard, Card candlestickCard, Card diningRoomCard) {
 		return false;
 	}

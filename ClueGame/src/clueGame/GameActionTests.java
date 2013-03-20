@@ -2,10 +2,8 @@ package clueGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.junit.Assert;
-
-import clueGame.BoardPiece;
+import org.junit.BeforeClass;
 
 
 public class GameActionTests {
@@ -36,43 +34,44 @@ public class GameActionTests {
     {
     }
 
+    @BeforeClass
     public void setUp()
-        throws Exception
     {
     	board = new Board();
         control = new ClueGame(123, 6, board);
-        mustardCard = new Card("Colonel Mustard", clueGame.Card.CardType.PERSON);
-        whiteCard = new Card("Mrs. White", clueGame.Card.CardType.PERSON);
-        peacockCard = new Card("Mrs. Peacock", clueGame.Card.CardType.PERSON);
-        greenCard = new Card("Mr. Green", clueGame.Card.CardType.PERSON);
-        plumCard = new Card("Professor Plum", clueGame.Card.CardType.PERSON);
-        scarletCard = new Card("Miss Scarlet", clueGame.Card.CardType.PERSON);
-        diningRoomCard = new Card("Dining Room", clueGame.Card.CardType.ROOM);
-        studyCard = new Card("Study", clueGame.Card.CardType.ROOM);
-        ballroomCard = new Card("Ballroom", clueGame.Card.CardType.ROOM);
-        kitchenCard = new Card("Kitchen", clueGame.Card.CardType.ROOM);
-        hallCard = new Card("Hall", clueGame.Card.CardType.ROOM);
-        libraryCard = new Card("Library", clueGame.Card.CardType.ROOM);
-        conservatoryCard = new Card("Conservatory", clueGame.Card.CardType.ROOM);
-        candlestickCard = new Card("Candlestick", clueGame.Card.CardType.WEAPON);
-        revolverCard = new Card("Revolver", clueGame.Card.CardType.WEAPON);
-        wrenchCard = new Card("Wrench", clueGame.Card.CardType.WEAPON);
-        knifeCard = new Card("Knife", clueGame.Card.CardType.WEAPON);
-        pipeCard = new Card("Lead Pipe", clueGame.Card.CardType.WEAPON);
-        ropeCard = new Card("Rope", clueGame.Card.CardType.WEAPON);
+        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
+        peacockCard = new Card("Mrs. Peacock", Card.CardType.PERSON);
+        greenCard = new Card("Mr. Green", Card.CardType.PERSON);
+        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
+        scarletCard = new Card("Miss Scarlet", Card.CardType.PERSON);
+        diningRoomCard = new Card("Dining Room", Card.CardType.ROOM);
+        studyCard = new Card("Study", Card.CardType.ROOM);
+        ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
+        kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
+        hallCard = new Card("Hall", Card.CardType.ROOM);
+        libraryCard = new Card("Library", Card.CardType.ROOM);
+        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        candlestickCard = new Card("Candlestick", Card.CardType.WEAPON);
+        revolverCard = new Card("Revolver", Card.CardType.WEAPON);
+        wrenchCard = new Card("Wrench", Card.CardType.WEAPON);
+        knifeCard = new Card("Knife", Card.CardType.WEAPON);
+        pipeCard = new Card("Lead Pipe", Card.CardType.WEAPON);
+        ropeCard = new Card("Rope", Card.CardType.WEAPON);
     }
 	
 	public void testAccusation()
     {
-        Assert.assertTrue(control.checkAccusation(mustardCard, candlestickCard, diningRoomCard));
-        Assert.assertFalse(control.checkAccusation(mustardCard, revolverCard, diningRoomCard));
-        Assert.assertFalse(control.checkAccusation(whiteCard, candlestickCard, diningRoomCard));
-        Assert.assertFalse(control.checkAccusation(mustardCard, candlestickCard, studyCard));
+        Assert.assertTrue(control.checkAccusation(plumCard, wrenchCard, kitchenCard));
+        Assert.assertFalse(control.checkAccusation(plumCard, revolverCard, kitchenCard));
+        Assert.assertFalse(control.checkAccusation(scarletCard, wrenchCard, kitchenCard));
+        Assert.assertFalse(control.checkAccusation(plumCard, wrenchCard, ballroomCard));
     }
 
+	//change values
     public void testSuggestion()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(mustardCard);
         player.addCard(knifeCard);
@@ -85,9 +84,10 @@ public class GameActionTests {
         Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
     }
 
+    //change values & funciton names
     public void testSuggestion2()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(knifeCard);
         player.addCard(revolverCard);
@@ -100,11 +100,9 @@ public class GameActionTests {
             Card result = player.disproveSuggestion(peacockCard, libraryCard, knifeCard);
             if(result.getCardName().equals("Mrs. Peacock"))
                 numPerson++;
-            else
-            if(result.getCardName().equals("Library"))
+            else if(result.getCardName().equals("Library"))
                 numRoom++;
-            else
-            if(result.getCardName().equals("Knife"))
+            else if(result.getCardName().equals("Knife"))
                 numWeapon++;
             else
                 Assert.fail();
@@ -115,22 +113,23 @@ public class GameActionTests {
         Assert.assertTrue(numWeapon > 0);
     }
 
+    //changes values and function names and look at functionality
     public void testSuggestion3()
     {
         ArrayList players = new ArrayList();
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(knifeCard);
         player.addCard(revolverCard);
         player.addCard(libraryCard);
         players.add(player);
-        player = new ComputerPlayer("Mr. Green", board.getBoardPiece(1), Color.green, control);
+        player = new ComputerPlayer("Mr. Green", Color.green, control);
         player.addCard(plumCard);
         player.addCard(wrenchCard);
         player.addCard(candlestickCard);
         player.addCard(ballroomCard);
         players.add(player);
-        player = new ComputerPlayer("Mrs. Peacock", board.getBoardPiece(1), Color.blue, control);
+        player = new ComputerPlayer("Mrs. Peacock", Color.blue, control);
         player.addCard(mustardCard);
         player.addCard(pipeCard);
         player.addCard(kitchenCard);
@@ -165,9 +164,10 @@ public class GameActionTests {
         Assert.assertTrue(pipe == 0);
     }
     
+    //change values and function name
     public void testSuggestionx2()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(mustardCard);
         player.addCard(knifeCard);
@@ -180,9 +180,10 @@ public class GameActionTests {
         Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
     }
 
+    //change values
     public void testSuggestionx()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(knifeCard);
         player.addCard(revolverCard);
@@ -192,108 +193,100 @@ public class GameActionTests {
         Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
     }
 
+    //change values
     public void testSelectTargetRoom()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
-        player.setLocation(board.getBoardPiece(96));
-        board.calcTargets(96, 3);
+        ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+        compPlayer.setLocation(VALUE);
+        board.startTargets(96, 3);
         for(int i = 0; i < 100; i++)
-            Assert.assertEquals(board.getBoardPiece(95), player.pickLocation(board.getTargets()));
-
+            Assert.assertEquals(VALUES, compPlayer.pickLocation(board.getTargets()));
     }
 
+    //change values and function name
     public void testSelectTarget2()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
-        player.setLocation(board.getBoardPiece(5));
-        board.calcTargets(5, 2);
-        int tot29 = 0;
-        int tot51 = 0;
-        for(int i = 0; i < 100; i++)
-        {
-            BoardPiece selected = player.pickLocation(board.getTargets());
-            if(selected == board.getBoardPiece(29))
-                tot29++;
-            else
-            if(selected == board.getBoardPiece(51))
-                tot51++;
-        }
-
-        Assert.assertEquals(100L, tot29 + tot51);
-        Assert.assertTrue(tot29 > 1);
-        Assert.assertTrue(tot51 > 1);
+    	ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+		// Pick a location with no rooms in target, just three targets
+		board.startTargets(board.calcIndex(14, 0), 2);
+		int loc_12_0Tot = 0;
+		int loc_14_2Tot = 0;
+		int loc_15_1Tot = 0;
+		// Run the test 100 times
+		for (int i=0; i<100; i++) {
+			BoardCell selected = player.pickLocation(board.getTargets());
+			if (selected == board.getCells(board.calcIndex(12, 0)))
+				loc_12_0Tot++;
+			else if (selected == board.getCells(board.calcIndex(14, 2)))
+				loc_14_2Tot++;
+			else if (selected == board.getCells(board.calcIndex(15, 1)))
+				loc_15_1Tot++;
+			else
+				Assert.fail("Invalid target selected");
+		}
+		// Ensure we have 100 total selections (fail should also ensure)
+		Assert.assertEquals(100, loc_12_0Tot + loc_14_2Tot + loc_15_1Tot);
+		// Ensure each target was selected more than once
+		Assert.assertTrue(loc_12_0Tot > 10);
+		Assert.assertTrue(loc_14_2Tot > 10);
+		Assert.assertTrue(loc_15_1Tot > 10);
     }
 
+    //change values
     public void testMakeSuggestion()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
-        player.setLocation(board.getBoardPiece(95));
-        player.updateSeen(mustardCard);
-        player.updateSeen(peacockCard);
-        player.updateSeen(scarletCard);
-        player.updateSeen(plumCard);
-        player.updateSeen(greenCard);
-        player.updateSeen(candlestickCard);
-        player.updateSeen(knifeCard);
-        player.updateSeen(pipeCard);
-        player.updateSeen(ropeCard);
-        player.updateSeen(revolverCard);
-        player.createSuggestion(board);
-        Assert.assertEquals(conservatoryCard, player.getRoomGuess());
-        Assert.assertEquals(whiteCard, player.getPersonGuess());
-        Assert.assertEquals(wrenchCard, player.getWeaponGuess());
+        ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+        compPlayer.setLocation(VALUE);
+        compPlayer.updateSeenCards(mustardCard);
+        compPlayer.updateSeenCards(peacockCard);
+        compPlayer.updateSeenCards(scarletCard);
+        compPlayer.updateSeenCards(plumCard);
+        compPlayer.updateSeenCards(greenCard);
+        compPlayer.updateSeenCards(candlestickCard);
+        compPlayer.updateSeenCards(knifeCard);
+        compPlayer.updateSeenCards(pipeCard);
+        compPlayer.updateSeenCards(ropeCard);
+        compPlayer.updateSeenCards(revolverCard);
+        compPlayer.makeSuggestion(compPlayer.getMyCards());
+        Assert.assertEquals(conservatoryCard, compPlayer.getGuess());
+        Assert.assertEquals(whiteCard, compPlayer.getGuess());
+        Assert.assertEquals(wrenchCard, compPlayer.getGuess());
     }
 
+    //change values
     public void testMakeSuggestion2()
     {
-        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
-        player.setLocation(board.getBoardPiece(95));
-        player.updateSeen(mustardCard);
-        player.updateSeen(peacockCard);
-        player.updateSeen(plumCard);
-        player.updateSeen(greenCard);
-        ArrayList seenList = player.getSeenCards();
-        System.out.println((new StringBuilder("seen ")).append(seenList.size()).toString());
-        player.updateSeen(candlestickCard);
-        player.updateSeen(knifeCard);
-        player.updateSeen(pipeCard);
-        player.updateSeen(ropeCard);
-        player.updateSeen(revolverCard);
-        player.createSuggestion(board);
-        Assert.assertEquals(conservatoryCard, player.getRoomGuess());
+        ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+        compPlayer.setLocation(VALUE);
+        compPlayer.updateSeenCards(mustardCard);
+        compPlayer.updateSeenCards(peacockCard);
+        compPlayer.updateSeenCards(plumCard);
+        compPlayer.updateSeenCards(greenCard);
+        ArrayList seenList = compPlayer.getMyCards();
+        compPlayer.updateSeenCards(candlestickCard);
+        compPlayer.updateSeenCards(knifeCard);
+        compPlayer.updateSeenCards(pipeCard);
+        compPlayer.updateSeenCards(ropeCard);
+        compPlayer.updateSeenCards(revolverCard);
+        compPlayer.makeSuggestion(compPlayer.getMyCards());
+        Assert.assertEquals(conservatoryCard, compPlayer.getGuess());
         int totScarlet = 0;
-        int totWhite = 0;
+        int totPlum = 0;
         for(int i = 0; i < 100; i++)
         {
-            player.createSuggestion(board);
-            Card pCard = player.getPersonGuess();
+            compPlayer.makeSuggestion(compPlayer.getMyCards());
+            Card pCard = compPlayer.getGuess();
             if(pCard.equals(scarletCard))
                 totScarlet++;
             else
             if(pCard.equals(whiteCard))
-                totWhite++;
-            pCard = player.getWeaponGuess();
-            Assert.assertEquals(wrenchCard, player.getWeaponGuess());
+                totPlum++;
+            pCard = compPlayer.getGuess();
+            Assert.assertEquals(wrenchCard, compPlayer.getGuess());
         }
 
-        Assert.assertEquals(100L, totScarlet + totWhite);
+        Assert.assertEquals(100L, totScarlet + totPlum);
         Assert.assertTrue(totScarlet > 0);
-        Assert.assertTrue(totWhite > 0);
-    }
-    
-    public void testUpdate()
-    {
-        ArrayList players = control.getPlayers();
-        ComputerPlayer player;
-        for(Iterator iterator = players.iterator(); iterator.hasNext(); player.updateSeen(ballroomCard))
-            player = (ComputerPlayer)iterator.next();
-
-        ArrayList seen;
-        for(Iterator iterator1 = players.iterator(); iterator1.hasNext(); Assert.assertTrue(seen.contains(ballroomCard)))
-        {
-            ComputerPlayer player = (ComputerPlayer)iterator1.next();
-            seen = player.getSeenCards();
-        }
-
+        Assert.assertTrue(totPlum > 0);
     }
 }

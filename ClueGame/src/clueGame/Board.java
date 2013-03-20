@@ -12,8 +12,6 @@ public class Board {
 	private int numRows, numColumns;
 
 	//Board Info
-//	private final int numRows = 25;
-//	private final int numColumns = 25;
 	private LinkedList<BoardCell> adjacencies;
 	private ArrayList<LinkedList<BoardCell>> listOfAdjacencies;
 	
@@ -277,9 +275,4 @@ public class Board {
 	public int getNumColumns() {
 		return numColumns;
 	}
-
-	public Object getBoardPiece(int i) {
-		return null;
-	}
-
 }
