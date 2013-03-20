@@ -10,4 +10,5 @@ public class Card {
 	public String getCardName() {
 		return null;
 	}
+
 }
