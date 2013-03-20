@@ -7,10 +7,14 @@ public class Player {
 	protected String name;
 	protected ArrayList cards;
 
+<<<<<<< HEAD
 	public Player(){}
 	
+	
+=======
 	public ArrayList getMyCards() {
 		return null;
 	}
-	
+
+>>>>>>> cb17ea27eac1b363fd908b742f154b8ae85400ad
 }

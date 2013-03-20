@@ -278,6 +278,10 @@ public class Board {
 		return numColumns;
 	}
 
+	public Object getBoardPiece(int i) {
+		return null;
+	}
+
 
 
 }
