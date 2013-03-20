@@ -12,7 +12,7 @@ public class Player {
 		
 	}
 	
-	public Card disproveSuggestion(Card person, Card room, Card weapon){
+	public Card disproveSuggestion(String person, String room, String weapon){
 		return null;
 	}
 	

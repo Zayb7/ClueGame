@@ -1,0 +1,248 @@
+package clueGame;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.junit.Assert;
+
+import clueGame.BoardPiece;
+
+
+public class GameActionTests {
+	
+	
+	public void testAccusation()
+    {
+        Assert.assertTrue(control.checkAccusation(mustardCard, candlestickCard, diningRoomCard));
+        Assert.assertFalse(control.checkAccusation(mustardCard, revolverCard, diningRoomCard));
+        Assert.assertFalse(control.checkAccusation(whiteCard, candlestickCard, diningRoomCard));
+        Assert.assertFalse(control.checkAccusation(mustardCard, candlestickCard, studyCard));
+    }
+
+    public void testSuggestion()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.addCard(peacockCard);
+        player.addCard(mustardCard);
+        player.addCard(knifeCard);
+        player.addCard(candlestickCard);
+        player.addCard(libraryCard);
+        player.addCard(ballroomCard);
+        Assert.assertEquals(peacockCard, player.disproveSuggestion(peacockCard, studyCard, wrenchCard));
+        Assert.assertEquals(libraryCard, player.disproveSuggestion(greenCard, libraryCard, wrenchCard));
+        Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
+        Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
+    }
+
+    public void testSuggestion2()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.addCard(peacockCard);
+        player.addCard(knifeCard);
+        player.addCard(revolverCard);
+        player.addCard(libraryCard);
+        int numRoom = 0;
+        int numWeapon = 0;
+        int numPerson = 0;
+        for(int i = 0; i < 50; i++)
+        {
+            Card result = player.disproveSuggestion(peacockCard, libraryCard, knifeCard);
+            if(result.getCardName().equals("Mrs. Peacock"))
+                numPerson++;
+            else
+            if(result.getCardName().equals("Library"))
+                numRoom++;
+            else
+            if(result.getCardName().equals("Knife"))
+                numWeapon++;
+            else
+                Assert.fail();
+        }
+
+        Assert.assertTrue(numRoom > 0);
+        Assert.assertTrue(numPerson > 0);
+        Assert.assertTrue(numWeapon > 0);
+    }
+
+    public void testSuggestion3()
+    {
+        ArrayList players = new ArrayList();
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.addCard(peacockCard);
+        player.addCard(knifeCard);
+        player.addCard(revolverCard);
+        player.addCard(libraryCard);
+        players.add(player);
+        player = new ComputerPlayer("Mr. Green", board.getBoardPiece(1), Color.green, control);
+        player.addCard(plumCard);
+        player.addCard(wrenchCard);
+        player.addCard(candlestickCard);
+        player.addCard(ballroomCard);
+        players.add(player);
+        player = new ComputerPlayer("Mrs. Peacock", board.getBoardPiece(1), Color.blue, control);
+        player.addCard(mustardCard);
+        player.addCard(pipeCard);
+        player.addCard(kitchenCard);
+        player.addCard(hallCard);
+        players.add(player);
+        control.setPlayers(players);
+        Assert.assertEquals(null, control.testSuggestion(scarletCard, diningRoomCard, ropeCard, player));
+        Assert.assertEquals(null, control.testSuggestion(scarletCard, studyCard, ropeCard, player));
+        Assert.assertEquals(libraryCard, control.testSuggestion(scarletCard, libraryCard, ropeCard, player));
+        Assert.assertEquals(peacockCard, control.testSuggestion(peacockCard, diningRoomCard, ropeCard, player));
+        Assert.assertEquals(wrenchCard, control.testSuggestion(scarletCard, diningRoomCard, wrenchCard, player));
+        Assert.assertEquals(null, control.testSuggestion(scarletCard, diningRoomCard, pipeCard, player));
+        int plum = 0;
+        int library = 0;
+        int pipe = 0;
+        for(int i = 0; i < 100; i++)
+        {
+            Card returnCard = control.testSuggestion(plumCard, libraryCard, pipeCard, player);
+            if(returnCard.equals(plumCard))
+                plum++;
+            else
+            if(returnCard.equals(libraryCard))
+                library++;
+            else
+            if(returnCard.equals(pipeCard))
+                pipe++;
+        }
+
+        Assert.assertEquals(100L, plum + library + pipe);
+        Assert.assertTrue(plum > 1);
+        Assert.assertTrue(library > 1);
+        Assert.assertTrue(pipe == 0);
+    }
+    
+    public void testSuggestionx2()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.addCard(peacockCard);
+        player.addCard(mustardCard);
+        player.addCard(knifeCard);
+        player.addCard(candlestickCard);
+        player.addCard(libraryCard);
+        player.addCard(ballroomCard);
+        Assert.assertEquals(peacockCard, player.disproveSuggestion(peacockCard, studyCard, wrenchCard));
+        Assert.assertEquals(libraryCard, player.disproveSuggestion(greenCard, libraryCard, wrenchCard));
+        Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
+        Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
+    }
+
+    public void testSuggestionx()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.addCard(peacockCard);
+        player.addCard(knifeCard);
+        player.addCard(revolverCard);
+        player.addCard(libraryCard);
+        Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
+        Assert.assertEquals(revolverCard, player.disproveSuggestion(greenCard, studyCard, revolverCard));
+        Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
+    }
+
+    public void testSelectTargetRoom()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.setLocation(board.getBoardPiece(96));
+        board.calcTargets(96, 3);
+        for(int i = 0; i < 100; i++)
+            Assert.assertEquals(board.getBoardPiece(95), player.pickLocation(board.getTargets()));
+
+    }
+
+    public void testSelectTarget2()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.setLocation(board.getBoardPiece(5));
+        board.calcTargets(5, 2);
+        int tot29 = 0;
+        int tot51 = 0;
+        for(int i = 0; i < 100; i++)
+        {
+            BoardPiece selected = player.pickLocation(board.getTargets());
+            if(selected == board.getBoardPiece(29))
+                tot29++;
+            else
+            if(selected == board.getBoardPiece(51))
+                tot51++;
+        }
+
+        Assert.assertEquals(100L, tot29 + tot51);
+        Assert.assertTrue(tot29 > 1);
+        Assert.assertTrue(tot51 > 1);
+    }
+
+    public void testMakeSuggestion()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.setLocation(board.getBoardPiece(95));
+        player.updateSeen(mustardCard);
+        player.updateSeen(peacockCard);
+        player.updateSeen(scarletCard);
+        player.updateSeen(plumCard);
+        player.updateSeen(greenCard);
+        player.updateSeen(candlestickCard);
+        player.updateSeen(knifeCard);
+        player.updateSeen(pipeCard);
+        player.updateSeen(ropeCard);
+        player.updateSeen(revolverCard);
+        player.createSuggestion(board);
+        Assert.assertEquals(conservatoryCard, player.getRoomGuess());
+        Assert.assertEquals(whiteCard, player.getPersonGuess());
+        Assert.assertEquals(wrenchCard, player.getWeaponGuess());
+    }
+
+    public void testMakeSuggestion2()
+    {
+        ComputerPlayer player = new ComputerPlayer("Mrs. White", board.getBoardPiece(1), Color.white, control);
+        player.setLocation(board.getBoardPiece(95));
+        player.updateSeen(mustardCard);
+        player.updateSeen(peacockCard);
+        player.updateSeen(plumCard);
+        player.updateSeen(greenCard);
+        ArrayList seenList = player.getSeenCards();
+        System.out.println((new StringBuilder("seen ")).append(seenList.size()).toString());
+        player.updateSeen(candlestickCard);
+        player.updateSeen(knifeCard);
+        player.updateSeen(pipeCard);
+        player.updateSeen(ropeCard);
+        player.updateSeen(revolverCard);
+        player.createSuggestion(board);
+        Assert.assertEquals(conservatoryCard, player.getRoomGuess());
+        int totScarlet = 0;
+        int totWhite = 0;
+        for(int i = 0; i < 100; i++)
+        {
+            player.createSuggestion(board);
+            Card pCard = player.getPersonGuess();
+            if(pCard.equals(scarletCard))
+                totScarlet++;
+            else
+            if(pCard.equals(whiteCard))
+                totWhite++;
+            pCard = player.getWeaponGuess();
+            Assert.assertEquals(wrenchCard, player.getWeaponGuess());
+        }
+
+        Assert.assertEquals(100L, totScarlet + totWhite);
+        Assert.assertTrue(totScarlet > 0);
+        Assert.assertTrue(totWhite > 0);
+    }
+    
+    public void testUpdate()
+    {
+        ArrayList players = control.getPlayers();
+        ComputerPlayer player;
+        for(Iterator iterator = players.iterator(); iterator.hasNext(); player.updateSeen(ballroomCard))
+            player = (ComputerPlayer)iterator.next();
+
+        ArrayList seen;
+        for(Iterator iterator1 = players.iterator(); iterator1.hasNext(); Assert.assertTrue(seen.contains(ballroomCard)))
+        {
+            ComputerPlayer player = (ComputerPlayer)iterator1.next();
+            seen = player.getSeenCards();
+        }
+
+    }
+}
