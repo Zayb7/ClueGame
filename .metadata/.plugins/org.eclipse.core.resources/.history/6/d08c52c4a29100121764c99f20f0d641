@@ -8,10 +8,6 @@ public class ClueGame {
 	ArrayList<ComputerPlayer> computers;
 	Player human;
 	int turn;
-	
-	public ClueGame(int I_DONT_KNOW, int numberOfPlayers, Board board){
-		
-	}
 
 	public ArrayList getPlayers() {
 		return null;
