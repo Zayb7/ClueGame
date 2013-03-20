@@ -3,7 +3,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 
 public class GameActionTests {
@@ -30,11 +32,7 @@ public class GameActionTests {
     Card ropeCard;
     Card conservatoryCard;
 
-    public GameActionTests()
-    {
-    }
-
-    @BeforeClass
+    @Before
     public void setUp()
     {
     	board = new Board();
@@ -60,6 +58,7 @@ public class GameActionTests {
         ropeCard = new Card("Rope", Card.CardType.WEAPON);
     }
 	
+    @Test
 	public void testAccusation()
     {
         Assert.assertTrue(control.checkAccusation(plumCard, wrenchCard, kitchenCard));
@@ -69,6 +68,7 @@ public class GameActionTests {
     }
 
 	//change values
+    @Test
     public void testSuggestion()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -85,6 +85,7 @@ public class GameActionTests {
     }
 
     //change values & funciton names
+    @Test
     public void testSuggestion2()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -114,9 +115,10 @@ public class GameActionTests {
     }
 
     //changes values and function names and look at functionality
+    @Test
     public void testSuggestion3()
     {
-        ArrayList players = new ArrayList();
+        ArrayList<Player> players = new ArrayList<Player>();
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         player.addCard(peacockCard);
         player.addCard(knifeCard);
@@ -165,6 +167,7 @@ public class GameActionTests {
     }
     
     //change values and function name
+    @Test
     public void testSuggestionx2()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -181,6 +184,7 @@ public class GameActionTests {
     }
 
     //change values
+    @Test
     public void testSuggestionx()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -194,6 +198,7 @@ public class GameActionTests {
     }
 
     //change values
+    @Test
     public void testSelectTargetRoom()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -204,6 +209,7 @@ public class GameActionTests {
     }
 
     //change values and function name
+    @Test
     public void testSelectTarget2()
     {
     	ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -233,6 +239,7 @@ public class GameActionTests {
     }
 
     //change values
+    @Test
     public void testMakeSuggestion()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -254,6 +261,7 @@ public class GameActionTests {
     }
 
     //change values
+    @Test
     public void testMakeSuggestion2()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -262,7 +270,7 @@ public class GameActionTests {
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(plumCard);
         compPlayer.updateSeenCards(greenCard);
-        ArrayList seenList = compPlayer.getMyCards();
+        ArrayList<Card> seenCards = compPlayer.getMyCards();
         compPlayer.updateSeenCards(candlestickCard);
         compPlayer.updateSeenCards(knifeCard);
         compPlayer.updateSeenCards(pipeCard);

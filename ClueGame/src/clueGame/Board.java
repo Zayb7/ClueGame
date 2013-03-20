@@ -21,7 +21,7 @@ public class Board {
 	
 
 	boolean [] visited;
-	Set targets = new HashSet<Integer>();
+	Set<BoardCell> targets = new HashSet<BoardCell>();
 
 
 	//Constructors	
@@ -145,7 +145,7 @@ public class Board {
 	}
 	
 	
-	public Set getTargets(){
+	public Set<BoardCell> getTargets(){
 		return targets;
 	}
 

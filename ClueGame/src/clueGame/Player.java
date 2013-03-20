@@ -1,12 +1,11 @@
 package clueGame;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class Player {
 	
 	protected String name;
-	protected ArrayList cards;
+	protected ArrayList<Card> cards;
 
 	public Player() {
 		
@@ -17,7 +16,7 @@ public class Player {
 		return null;
 	}
 	
-	public ArrayList getMyCards() {
+	public ArrayList<Card> getMyCards() {
 		return null;
 	}
 	

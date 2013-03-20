@@ -13,7 +13,7 @@ public class ClueGame {
 		
 	}
 
-	public ArrayList getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return null;
 	}
 
@@ -33,7 +33,7 @@ public class ClueGame {
 		return null;
 	}
 
-	public void setPlayers(ArrayList players) {
+	public void setPlayers(ArrayList<Player> players) {
 		
 	}
 

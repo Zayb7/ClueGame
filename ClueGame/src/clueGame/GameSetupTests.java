@@ -1,11 +1,10 @@
 package clueGame;
 
-import clueGame.*;
-import java.awt.Color;
-import java.io.PrintStream;
 import java.util.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class GameSetupTests
 {
@@ -32,11 +31,7 @@ public class GameSetupTests
     Card ropeCard;
     Card conservatoryCard;
 
-    public GameSetupTests()
-    {
-    }
-
-    @BeforeClass
+    @Before
     public void setUp()
     {
     	board = new Board();
@@ -62,11 +57,12 @@ public class GameSetupTests
         ropeCard = new Card("Rope", Card.CardType.WEAPON);
     }
 
+    @Test
     public void testDeal()
     {
-        ArrayList players = control.getPlayers();
+        ArrayList<Player> players = control.getPlayers();
         int totCards = 0;
-        Set allCards = new HashSet();
+        Set<Card> allCards = new HashSet<Card>();
         for(Iterator iterator = players.iterator(); iterator.hasNext();)
         {
             Player player = (Player)iterator.next();
