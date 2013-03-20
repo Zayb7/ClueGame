@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.io.PrintStream;
 import java.util.*;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 
 public class GameSetupTests
 {
@@ -35,30 +36,30 @@ public class GameSetupTests
     {
     }
 
+    @BeforeClass
     public void setUp()
-        throws Exception
     {
     	board = new Board();
         control = new ClueGame(123, 6, board);
-        mustardCard = new Card("Colonel Mustard", clueGame.Card.CardType.PERSON);
-        whiteCard = new Card("Mrs. White", clueGame.Card.CardType.PERSON);
-        peacockCard = new Card("Mrs. Peacock", clueGame.Card.CardType.PERSON);
-        greenCard = new Card("Mr. Green", clueGame.Card.CardType.PERSON);
-        plumCard = new Card("Professor Plum", clueGame.Card.CardType.PERSON);
-        scarletCard = new Card("Miss Scarlet", clueGame.Card.CardType.PERSON);
-        diningRoomCard = new Card("Dining Room", clueGame.Card.CardType.ROOM);
-        studyCard = new Card("Study", clueGame.Card.CardType.ROOM);
-        ballroomCard = new Card("Ballroom", clueGame.Card.CardType.ROOM);
-        kitchenCard = new Card("Kitchen", clueGame.Card.CardType.ROOM);
-        hallCard = new Card("Hall", clueGame.Card.CardType.ROOM);
-        libraryCard = new Card("Library", clueGame.Card.CardType.ROOM);
-        conservatoryCard = new Card("Conservatory", clueGame.Card.CardType.ROOM);
-        candlestickCard = new Card("Candlestick", clueGame.Card.CardType.WEAPON);
-        revolverCard = new Card("Revolver", clueGame.Card.CardType.WEAPON);
-        wrenchCard = new Card("Wrench", clueGame.Card.CardType.WEAPON);
-        knifeCard = new Card("Knife", clueGame.Card.CardType.WEAPON);
-        pipeCard = new Card("Lead Pipe", clueGame.Card.CardType.WEAPON);
-        ropeCard = new Card("Rope", clueGame.Card.CardType.WEAPON);
+        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
+        peacockCard = new Card("Mrs. Peacock", Card.CardType.PERSON);
+        greenCard = new Card("Mr. Green", Card.CardType.PERSON);
+        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
+        scarletCard = new Card("Miss Scarlet", Card.CardType.PERSON);
+        diningRoomCard = new Card("Dining Room", Card.CardType.ROOM);
+        studyCard = new Card("Study", Card.CardType.ROOM);
+        ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
+        kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
+        hallCard = new Card("Hall", Card.CardType.ROOM);
+        libraryCard = new Card("Library", Card.CardType.ROOM);
+        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        candlestickCard = new Card("Candlestick", Card.CardType.WEAPON);
+        revolverCard = new Card("Revolver", Card.CardType.WEAPON);
+        wrenchCard = new Card("Wrench", Card.CardType.WEAPON);
+        knifeCard = new Card("Knife", Card.CardType.WEAPON);
+        pipeCard = new Card("Lead Pipe", Card.CardType.WEAPON);
+        ropeCard = new Card("Rope", Card.CardType.WEAPON);
     }
 
     public void testDeal()

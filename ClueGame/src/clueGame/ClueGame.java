@@ -16,4 +16,12 @@ public class ClueGame {
 		return false;
 	}
 
+	public Card testSuggestion(Card plumCard, Card libraryCard, Card pipeCard, ComputerPlayer player) {
+		return null;
+	}
+
+	public void setPlayers(ArrayList players) {
+		
+	}
+
 }
