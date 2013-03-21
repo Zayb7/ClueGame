@@ -20,6 +20,10 @@ public class Player {
 	public ArrayList<Card> getMyCards() {
 		return null;
 	}
+
+	public void setLocation(int location) {
+		this.location = location;
+	}
 	
 	
 }

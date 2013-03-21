@@ -6,7 +6,6 @@ public class Player {
 	
 	protected String name;
 	protected ArrayList<Card> cards;
-	protected int location;
 
 	public Player() {
 		

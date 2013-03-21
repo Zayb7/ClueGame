@@ -202,11 +202,10 @@ public class GameActionTests {
     public void testSelectTargetRoom()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        //Computer Player set location at U4
-        compPlayer.setLocation(board.getCells(96));
+        compPlayer.setLocation(VALUE);
         board.startTargets(96, 3);
         for(int i = 0; i < 100; i++)
-            Assert.assertEquals(226, compPlayer.pickLocation(board.getTargets()));
+            Assert.assertEquals(VALUES, compPlayer.pickLocation(board.getTargets()));
     }
 
     //change values and function name
@@ -244,8 +243,7 @@ public class GameActionTests {
     public void testMakeSuggestion()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        //computer player placed at location 
-        compPlayer.setLocation(board.getCells(160));
+        compPlayer.setLocation(VALUE);
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(scarletCard);
@@ -267,8 +265,7 @@ public class GameActionTests {
     public void testMakeSuggestion2()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        //computer player placed at V20
-        compPlayer.setLocation(board.getCells(497));
+        compPlayer.setLocation(VALUE);
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(plumCard);
