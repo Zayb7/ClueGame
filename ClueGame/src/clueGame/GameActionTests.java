@@ -106,6 +106,8 @@ public class GameActionTests {
         Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
         //tests revealing none of the cards
         Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
+        //tests for picking a random card based on having 2 of the cards
+        Assert.assertEquals(plumCard, player.disproveSuggestion(plumCard, conservatoryCard, wrenchCard));
     }
     
     @Test
@@ -194,47 +196,16 @@ public class GameActionTests {
         Assert.assertTrue(library > 1);
         Assert.assertTrue(pipe == 0);
     }
-    
-    //change values and function name
-    @Test
-    public void testSuggestionx2()
-    {
-        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        player.addCard(peacockCard);
-        player.addCard(mustardCard);
-        player.addCard(knifeCard);
-        player.addCard(candlestickCard);
-        player.addCard(libraryCard);
-        player.addCard(ballroomCard);
-        Assert.assertEquals(peacockCard, player.disproveSuggestion(peacockCard, studyCard, wrenchCard));
-        Assert.assertEquals(libraryCard, player.disproveSuggestion(greenCard, libraryCard, wrenchCard));
-        Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
-        Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
-    }
-
-    //change values
-    @Test
-    public void testSuggestionx()
-    {
-        ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        player.addCard(peacockCard);
-        player.addCard(knifeCard);
-        player.addCard(revolverCard);
-        player.addCard(libraryCard);
-        Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
-        Assert.assertEquals(revolverCard, player.disproveSuggestion(greenCard, studyCard, revolverCard));
-        Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
-    }
 
     //change values
     @Test
     public void testSelectTargetRoom()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        compPlayer.setLocation(VALUE);
+        compPlayer.setLocation(board.getCells(96));
         board.startTargets(96, 3);
         for(int i = 0; i < 100; i++)
-            Assert.assertEquals(VALUES, compPlayer.pickLocation(board.getTargets()));
+            Assert.assertEquals(96, compPlayer.pickLocation(board.getTargets()));
     }
 
     //change values and function name
@@ -272,7 +243,8 @@ public class GameActionTests {
     public void testMakeSuggestion()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        compPlayer.setLocation(VALUE);
+        //Cell J7
+        compPlayer.setLocation(board.getCells(160));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(scarletCard);
@@ -294,7 +266,8 @@ public class GameActionTests {
     public void testMakeSuggestion2()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        compPlayer.setLocation(VALUE);
+        //Cell V20
+        compPlayer.setLocation(board.getCells(497));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(plumCard);

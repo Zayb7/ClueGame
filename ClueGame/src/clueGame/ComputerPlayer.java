@@ -7,7 +7,8 @@ import java.util.Set;
 public class ComputerPlayer extends Player {
 
 	private String guess;
-	
+	private BoardCell location;
+
 	public ComputerPlayer(String name, Color color, ClueGame cg) {
 		super();
 	}
@@ -39,6 +40,10 @@ public class ComputerPlayer extends Player {
 	
 	public void setGuess(String guess) {
 		this.guess = guess;
+	}
+	
+	public void setLocation(BoardCell location) {
+		this.location = location;
 	}
 
 }
