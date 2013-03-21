@@ -167,7 +167,7 @@ public class GameActionTests {
         player.addCard(hallCard);
         players.add(player);
         control.setPlayers(players);
-        Assert.assert(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), studyCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard.getCardName(), libraryCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
@@ -235,7 +235,7 @@ public class GameActionTests {
         compPlayer.setLocation(board.getCells(96));
         board.startTargets(96, 3);
         for(int i = 0; i < 100; i++)
-            Assert.assertEquals(96, compPlayer.pickLocation(board.getTargets()));
+            Assert.assertEquals(226, compPlayer.pickLocation(board.getTargets()));
     }
 
     //change values and function name
@@ -273,7 +273,7 @@ public class GameActionTests {
     public void testMakeSuggestion()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
-        //computer player placed at location J7 
+        //computer player placed at location 
         compPlayer.setLocation(board.getCells(160));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
