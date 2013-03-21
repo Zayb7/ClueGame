@@ -8,7 +8,10 @@ public class ComputerPlayer extends Player {
 
 	private String guess;
 	private BoardCell location;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 4d93d2fb07e99fe235a6242100c48cb692cecae2
 
 	public ComputerPlayer(String name, Color color, ClueGame cg) {
 		super();

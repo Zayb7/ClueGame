@@ -169,7 +169,7 @@ public class GameActionTests {
         player.addCard(hallCard);
         players.add(player);
         control.setPlayers(players);
-        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assert(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), studyCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard.getCardName(), libraryCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
@@ -202,7 +202,10 @@ public class GameActionTests {
     public void testSelectTargetRoom()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+<<<<<<< HEAD
         //Computer Player set location at U4
+=======
+>>>>>>> 4d93d2fb07e99fe235a6242100c48cb692cecae2
         compPlayer.setLocation(board.getCells(96));
         board.startTargets(96, 3);
         for(int i = 0; i < 100; i++)
@@ -244,7 +247,11 @@ public class GameActionTests {
     public void testMakeSuggestion()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+<<<<<<< HEAD
+        //computer player placed at location J7 
+=======
         //Cell J7
+>>>>>>> 4d93d2fb07e99fe235a6242100c48cb692cecae2
         compPlayer.setLocation(board.getCells(160));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
@@ -267,7 +274,11 @@ public class GameActionTests {
     public void testMakeSuggestion2()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+<<<<<<< HEAD
+        //computer player placed at V20
+=======
         //Cell V20
+>>>>>>> 4d93d2fb07e99fe235a6242100c48cb692cecae2
         compPlayer.setLocation(board.getCells(497));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);

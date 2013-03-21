@@ -169,7 +169,7 @@ public class GameActionTests {
         player.addCard(hallCard);
         players.add(player);
         control.setPlayers(players);
-        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assert(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), studyCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard.getCardName(), libraryCard.getCardName(), ropeCard.getCardName(), player));
         Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
