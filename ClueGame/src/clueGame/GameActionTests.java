@@ -10,46 +10,59 @@ import org.junit.Test;
 
 public class GameActionTests {
 	
-	ClueGame control;
-	Board board;
-    Card mustardCard;
-    Card whiteCard;
-    Card diningRoomCard;
-    Card studyCard;
-    Card candlestickCard;
-    Card revolverCard;
-    Card peacockCard;
-    Card libraryCard;
-    Card wrenchCard;
-    Card knifeCard;
-    Card greenCard;
-    Card plumCard;
-    Card ballroomCard;
-    Card kitchenCard;
-    Card hallCard;
-    Card pipeCard;
-    Card scarletCard;
-    Card ropeCard;
-    Card conservatoryCard;
+	private ClueGame control;
+	private Board board;
+	
+	//player cards
+    private Card mustardCard;
+    private Card whiteCard;
+    private Card peacockCard;
+    private Card scarletCard;
+    private Card greenCard;
+    private Card plumCard;
+    
+    //Room cards
+    private Card diningRoomCard;
+    private Card studyCard;
+    private Card libraryCard;
+    private Card ballroomCard;
+    private Card kitchenCard;
+    private Card hallCard;
+    private Card conservatoryCard;
+    
+    //Weapon cards
+    private Card candlestickCard;
+    private Card revolverCard;
+    private Card wrenchCard;
+    private Card knifeCard;
+    private Card pipeCard;
+    private Card ropeCard;
+    
 
     @Before
     public void setUp()
     {
     	board = new Board();
         control = new ClueGame(123, 6, board);
-        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        
+        //initialize all of the Person Cards
         whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
+        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
         peacockCard = new Card("Mrs. Peacock", Card.CardType.PERSON);
         greenCard = new Card("Mr. Green", Card.CardType.PERSON);
-        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
         scarletCard = new Card("Miss Scarlet", Card.CardType.PERSON);
+        
+        //initialize all of the Room Cards
         diningRoomCard = new Card("Dining Room", Card.CardType.ROOM);
-        studyCard = new Card("Study", Card.CardType.ROOM);
+        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        libraryCard = new Card("Library", Card.CardType.ROOM);
         ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
         kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
         hallCard = new Card("Hall", Card.CardType.ROOM);
-        libraryCard = new Card("Library", Card.CardType.ROOM);
-        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        studyCard = new Card("Study", Card.CardType.ROOM);
+        
+        //initialize all of the Weapon Cards
         candlestickCard = new Card("Candlestick", Card.CardType.WEAPON);
         revolverCard = new Card("Revolver", Card.CardType.WEAPON);
         wrenchCard = new Card("Wrench", Card.CardType.WEAPON);
@@ -61,38 +74,54 @@ public class GameActionTests {
     @Test
 	public void testAccusation()
     {
+    	//tests the correct accusation
         Assert.assertTrue(control.checkAccusation(plumCard, wrenchCard, kitchenCard));
+        //tests an accusation with wrong weapon
         Assert.assertFalse(control.checkAccusation(plumCard, revolverCard, kitchenCard));
+        //tests an accusation with the wrong player
         Assert.assertFalse(control.checkAccusation(scarletCard, wrenchCard, kitchenCard));
-        Assert.assertFalse(control.checkAccusation(plumCard, wrenchCard, ballroomCard));
+        //tests an accusation with wrong weapon and wrong room
+        Assert.assertFalse(control.checkAccusation(plumCard, revolverCard, ballroomCard));
     }
 
-	//change values
     @Test
     public void testSuggestion()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+        //gives the computer player 2 of each type of card
         player.addCard(peacockCard);
-        player.addCard(mustardCard);
+        player.addCard(plumCard);
+       
+        player.addCard(conservatoryCard);
+        player.addCard(ballroomCard);
+        
         player.addCard(knifeCard);
         player.addCard(candlestickCard);
-        player.addCard(libraryCard);
-        player.addCard(ballroomCard);
-        Assert.assertEquals(peacockCard, player.disproveSuggestion(peacockCard, studyCard, wrenchCard));
-        Assert.assertEquals(libraryCard, player.disproveSuggestion(greenCard, libraryCard, wrenchCard));
+        
+        //tests revealing a player card
+        Assert.assertEquals(plumCard, player.disproveSuggestion(plumCard, studyCard, wrenchCard));
+        //tests revealing a room card
+        Assert.assertEquals(conservatoryCard, player.disproveSuggestion(peacockCard, conservatoryCard, wrenchCard));
+        //tests revealing a weapon card
         Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
+        //tests revealing none of the cards
         Assert.assertEquals(null, player.disproveSuggestion(greenCard, studyCard, wrenchCard));
     }
-
-    //change values & funciton names
+    
     @Test
     public void testSuggestion2()
     {
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
+        //gives the computer player 2 of each type of card
         player.addCard(peacockCard);
+        player.addCard(plumCard);
+       
+        player.addCard(conservatoryCard);
+        player.addCard(ballroomCard);
+        
         player.addCard(knifeCard);
-        player.addCard(revolverCard);
-        player.addCard(libraryCard);
+        player.addCard(candlestickCard);
+        
         int numRoom = 0;
         int numWeapon = 0;
         int numPerson = 0;
@@ -138,18 +167,18 @@ public class GameActionTests {
         player.addCard(hallCard);
         players.add(player);
         control.setPlayers(players);
-        Assert.assertEquals(null, control.testSuggestion(scarletCard, diningRoomCard, ropeCard, player));
-        Assert.assertEquals(null, control.testSuggestion(scarletCard, studyCard, ropeCard, player));
-        Assert.assertEquals(libraryCard, control.testSuggestion(scarletCard, libraryCard, ropeCard, player));
-        Assert.assertEquals(peacockCard, control.testSuggestion(peacockCard, diningRoomCard, ropeCard, player));
-        Assert.assertEquals(wrenchCard, control.testSuggestion(scarletCard, diningRoomCard, wrenchCard, player));
-        Assert.assertEquals(null, control.testSuggestion(scarletCard, diningRoomCard, pipeCard, player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), studyCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard.getCardName(), libraryCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(wrenchCard, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), wrenchCard.getCardName(), player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), pipeCard.getCardName(), player));
         int plum = 0;
         int library = 0;
         int pipe = 0;
         for(int i = 0; i < 100; i++)
         {
-            Card returnCard = control.testSuggestion(plumCard, libraryCard, pipeCard, player);
+            Card returnCard = control.handleSuggestion(plumCard.getCardName(), libraryCard.getCardName(), pipeCard.getCardName(), player);
             if(returnCard.equals(plumCard))
                 plum++;
             else

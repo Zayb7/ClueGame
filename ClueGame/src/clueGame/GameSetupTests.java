@@ -9,46 +9,59 @@ import org.junit.Test;
 public class GameSetupTests
 {
 	
-	ClueGame control;
-	Board board;
-    Card mustardCard;
-    Card whiteCard;
-    Card diningRoomCard;
-    Card studyCard;
-    Card candlestickCard;
-    Card revolverCard;
-    Card peacockCard;
-    Card libraryCard;
-    Card wrenchCard;
-    Card knifeCard;
-    Card greenCard;
-    Card plumCard;
-    Card ballroomCard;
-    Card kitchenCard;
-    Card hallCard;
-    Card pipeCard;
-    Card scarletCard;
-    Card ropeCard;
-    Card conservatoryCard;
+	private ClueGame control;
+	private Board board;
+	
+	//player cards
+    private Card mustardCard;
+    private Card whiteCard;
+    private Card peacockCard;
+    private Card scarletCard;
+    private Card greenCard;
+    private Card plumCard;
+    
+    //Room cards
+    private Card diningRoomCard;
+    private Card studyCard;
+    private Card libraryCard;
+    private Card ballroomCard;
+    private Card kitchenCard;
+    private Card hallCard;
+    private Card conservatoryCard;
+    
+    //Weapon cards
+    private Card candlestickCard;
+    private Card revolverCard;
+    private Card wrenchCard;
+    private Card knifeCard;
+    private Card pipeCard;
+    private Card ropeCard;
+    
 
     @Before
     public void setUp()
     {
     	board = new Board();
         control = new ClueGame(123, 6, board);
-        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        
+        //initialize all of the Person Cards
         whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
+        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
         peacockCard = new Card("Mrs. Peacock", Card.CardType.PERSON);
         greenCard = new Card("Mr. Green", Card.CardType.PERSON);
-        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
         scarletCard = new Card("Miss Scarlet", Card.CardType.PERSON);
+        
+        //initialize all of the Room Cards
         diningRoomCard = new Card("Dining Room", Card.CardType.ROOM);
-        studyCard = new Card("Study", Card.CardType.ROOM);
+        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        libraryCard = new Card("Library", Card.CardType.ROOM);
         ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
         kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
         hallCard = new Card("Hall", Card.CardType.ROOM);
-        libraryCard = new Card("Library", Card.CardType.ROOM);
-        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
+        studyCard = new Card("Study", Card.CardType.ROOM);
+        
+        //initialize all of the Weapon Cards
         candlestickCard = new Card("Candlestick", Card.CardType.WEAPON);
         revolverCard = new Card("Revolver", Card.CardType.WEAPON);
         wrenchCard = new Card("Wrench", Card.CardType.WEAPON);

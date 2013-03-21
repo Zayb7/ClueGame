@@ -29,7 +29,7 @@ public class ClueGame {
 		return false;
 	}
 
-	public Card testSuggestion(Card plumCard, Card libraryCard, Card pipeCard, ComputerPlayer player) {
+	public Card handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
 		return null;
 	}
 
