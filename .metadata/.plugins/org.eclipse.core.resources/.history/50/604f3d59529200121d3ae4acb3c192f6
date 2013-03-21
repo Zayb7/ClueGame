@@ -1,0 +1,17 @@
+package clueGame;
+
+import java.awt.*;
+
+import javax.swing.JFrame;
+
+public class ControlGUI extends JFrame {
+
+	public ControlGUI(){
+		setSize(new Dimension(800, 300));
+	}
+	
+	public static void main(String args[]){
+		ControlGUI gui = new ControlGUI();
+		gui.setVisible(true);
+	}
+}

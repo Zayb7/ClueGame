@@ -1,0 +1,15 @@
+package clueGame;
+
+import javax.swing.JFrame;
+
+public class ControlGUI extends JFrame {
+
+	public ControlGUI(){
+		
+	}
+	
+	public static void main(String args[]){
+		ControlGUI gui = new ControlGUI();
+		gui.setVisible(true);
+	}
+}
