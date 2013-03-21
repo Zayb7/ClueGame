@@ -74,29 +74,36 @@ public class GameSetupTests
     public void testDeal()
     {
         ArrayList<Player> players = control.getPlayers();
-        int totalNumCards = 0;
+        int totCards = 0;
         Set<Card> allCards = new HashSet<Card>();
         for(Player p: players) {
-            totalNumCards += p.getMyCards().size();
+            totCards += p.getMyCards().size();
             for (Card card: p.getMyCards()) {
             	allCards.add(card);
             }    	
         }
+        for(Iterator iterator = players.iterator(); iterator.hasNext();)
+        {
+            Player player = (Player)iterator.next();
+            totCards += player.getMyCards().size();
+            Card card;
+            for(Iterator iterator3 = player.getMyCards().iterator(); iterator3.hasNext(); allCards.add(card))
+                card = (Card)iterator3.next();
 
-        totalNumCards += control.getHuman().getMyCards().size();
-        for(Card card: control.getHuman().getMyCards()){
-        	allCards.add(card);
         }
 
-        //Checks to make sure that there are 19 cards for all players
-        Assert.assertEquals(totalNumCards, 19);
-        //Checks to make sure that human has 3 cards
-        Assert.assertEquals(allCards.size(), 3);
-        int totHumanCards = control.getHuman().getMyCards().size();
+        totCards += control.getHuman().getMyCards().size();
+        Card card;
+        for(Iterator iterator1 = control.getHuman().getMyCards().iterator(); iterator1.hasNext(); allCards.add(card))
+            card = (Card)iterator1.next();
 
-        for(Player player: players)
-        	//Checking that the all players have three or four cards
-        	Assert.assertTrue(player.getMyCards().size() == totHumanCards || player.getMyCards().size() == totHumanCards + 1 || player.getMyCards().size() != totHumanCards - 1);
+        Assert.assertEquals(totCards, 18);
+        Assert.assertEquals(allCards.size(), 18);
+        int numCards = control.getHuman().getMyCards().size();
+        Player player;
+        for(Iterator iterator2 = players.iterator(); iterator2.hasNext(); Assert.assertTrue(player.getMyCards().size() == numCards || player.getMyCards().size() == numCards - 1 || player.getMyCards().size() == numCards + 1))
+            player = (Player)iterator2.next();
+
     }
 
     

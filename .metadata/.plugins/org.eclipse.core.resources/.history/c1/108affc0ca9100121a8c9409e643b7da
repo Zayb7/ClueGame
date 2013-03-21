@@ -88,15 +88,12 @@ public class GameSetupTests
         	allCards.add(card);
         }
 
-        //Checks to make sure that there are 19 cards for all players
         Assert.assertEquals(totalNumCards, 19);
-        //Checks to make sure that human has 3 cards
-        Assert.assertEquals(allCards.size(), 3);
+        Assert.assertEquals(allCards.size(), 19);
         int totHumanCards = control.getHuman().getMyCards().size();
 
         for(Player player: players)
-        	//Checking that the all players have three or four cards
-        	Assert.assertTrue(player.getMyCards().size() == totHumanCards || player.getMyCards().size() == totHumanCards + 1 || player.getMyCards().size() != totHumanCards - 1);
+        	Assert.assertTrue(player.getMyCards().size() == totHumanCards || player.getMyCards().size() == totHumanCards + 1 || player.getMyCards().size() == totHumanCards - 1);
     }
 
     

@@ -146,7 +146,7 @@ public class GameActionTests {
     }
 
     @Test
-    public void testAllPlayersQueriedSuggestion()
+    public void testAllPlayersQueriedSuggestions()
     {
         ArrayList<Player> players = new ArrayList<Player>();
         ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
@@ -238,6 +238,7 @@ public class GameActionTests {
 		Assert.assertTrue(loc3 > 10);
     }
 
+    //change values
     @Test
     public void testMakeSuggestion()
     {
@@ -255,21 +256,21 @@ public class GameActionTests {
         compPlayer.updateSeenCards(ropeCard);
         compPlayer.updateSeenCards(wrenchCard);
         compPlayer.makeSuggestion(compPlayer.getMyCards());
-        //testing actual suggestion that was made
         Assert.assertEquals(ballroomCard, compPlayer.getGuess());
         Assert.assertEquals(greenCard, compPlayer.getGuess());
         Assert.assertEquals(revolverCard, compPlayer.getGuess());
     }
 
+    //change values
     @Test
-    public void testAllPlayersQueriedMakingSuggestion()
+    public void testMakeSuggestion2()
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         //Cell V20
         compPlayer.setLocation(board.getCells(497));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
-        compPlayer.updateSeenCards(whiteCard);
+        compPlayer.updateSeenCards(plumCard);
         compPlayer.updateSeenCards(greenCard);
         ArrayList<Card> seenCards = compPlayer.getMyCards();
         compPlayer.updateSeenCards(candlestickCard);
@@ -279,23 +280,23 @@ public class GameActionTests {
         compPlayer.updateSeenCards(revolverCard);
         compPlayer.makeSuggestion(compPlayer.getMyCards());
         Assert.assertEquals(conservatoryCard, compPlayer.getGuess());
-        int numGreen = 0;
-        int numWhite = 0;
-        //50 iterations for checking multiple matches
-        for(int i = 0; i < 50; i++)
+        int totScarlet = 0;
+        int totPlum = 0;
+        for(int i = 0; i < 100; i++)
         {
             compPlayer.makeSuggestion(compPlayer.getMyCards());
-            Card suggestedCard = compPlayer.getGuess();
-            if(suggestedCard.equals(greenCard))
-                numGreen++;
-            else if(suggestedCard.equals(whiteCard))
-                numWhite++;
-            suggestedCard = compPlayer.getGuess();
+            Card pCard = compPlayer.getGuess();
+            if(pCard.equals(scarletCard))
+                totScarlet++;
+            else
+            if(pCard.equals(whiteCard))
+                totPlum++;
+            pCard = compPlayer.getGuess();
             Assert.assertEquals(wrenchCard, compPlayer.getGuess());
         }
 
-        Assert.assertEquals(50, numGreen + numWhite);
-        Assert.assertTrue(numGreen > 0);
-        Assert.assertTrue(numWhite > 0);
+        Assert.assertEquals(100L, totScarlet + totPlum);
+        Assert.assertTrue(totScarlet > 0);
+        Assert.assertTrue(totPlum > 0);
     }
 }

@@ -1,2 +1,13 @@
 1363811895441	Move compilation unit
 1363813098080	Move compilation unit
+1363829074901	Rename local variable 'library'
+1363829101428	Rename local variable 'candlestick'
+1363829182072	Rename local variable 'loc_12_0Tot'
+1363829190604	Rename local variable 'loc_14_2Tot'
+1363829197636	Rename local variable 'loc_15_1Tot'
+1363829881773	Rename local variable 'totScarlet'
+1363829889306	Rename local variable 'totPlum'
+1363829901839	Rename local variable 'totWhite'
+1363829965918	Rename local variable 'pCard'
+1363830531774	Rename local variable 'totCards'
+1363830877023	Rename local variable 'numCards'
