@@ -12,13 +12,11 @@ public class RoomCell extends BoardCell {
 	//methods
 	@Override
 	public boolean isRoom(){
-		//isRoom = true;
 		return isRoom;
 	}
 	
 	@Override
 	public boolean isDoorway(){
-		//isDoor = true;
 		return isDoor;
 	}
 	

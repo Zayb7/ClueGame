@@ -173,6 +173,7 @@ public class Board {
 			else {
 				char c = toSplit[0].charAt(0);
 				rooms.put(c, toSplit[1]);
+				RoomCell r = new RoomCell();
 			}
 		}
 	}
@@ -211,6 +212,7 @@ public class Board {
 						r.isRoom = true;
 						r.row = rowCount;
 						r.col = i;
+						r.setRoomName(rooms.get(toSplit[i].charAt(0)));
 						if(toSplit[i].length() >  1){
 							determineAndSetDoorwayDirection(toSplit[i].charAt(1), r);
 							r.isDoor = true;
@@ -274,9 +276,5 @@ public class Board {
 
 	public int getNumColumns() {
 		return numColumns;
-	}
-	
-	public String getRoomName() {
-		rooms.
 	}
 }

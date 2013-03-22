@@ -5,6 +5,7 @@ public abstract class BoardCell {
 	protected int row, col;
 	protected boolean isWalkway = false;
 	protected boolean isDoor = false, isRoom = false;
+	protected String roomName;
 	
 	//methods
 	public boolean isWalkway(){
@@ -17,6 +18,14 @@ public abstract class BoardCell {
 	
 	public boolean isDoorway(){
 		return false;
+	}
+	
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+	
+	public String getRoomName() {
+		return roomName;
 	}
 	
 	//public abstract void draw();
