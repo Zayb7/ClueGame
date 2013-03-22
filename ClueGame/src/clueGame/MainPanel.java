@@ -12,22 +12,12 @@ public class MainPanel extends JPanel {
 		
 		JPanel whoseTurnPanel = new JPanel();
 		//Label and text box for whoseTurn
-		JLabel whoseTurnLabel = new JLabel("            Whose turn?");
+		JLabel whoseTurnLabel = new JLabel(" Whose turn?");
 		setLayout(new GridLayout(0,1));
 		whoseTurnPanel.add(whoseTurnLabel, BorderLayout.NORTH);
-		JTextField whoseTurnText = new JTextField();
-		whoseTurnPanel.add(whoseTurnText, BorderLayout.SOUTH);
+		JTextField whoseTurnText = new JTextField(10);
+		whoseTurnPanel.add(whoseTurnText, BorderLayout.BEFORE_FIRST_LINE);
 		add(whoseTurnPanel, BorderLayout.WEST);
-		
-		
-		
-		//button panel
-//		ButtonPanel buttons = new ButtonPanel();
-//		add(buttons, BorderLayout.CENTER);
-		//Other panels inside
-//		InsidePanel diePanel = new InsidePanel();
-//		InsidePanel guessPanel = new InsidePanel();
-//		InsidePanel guessResultPanel = new InsidePanel();
 
 		
 	}

@@ -15,7 +15,15 @@ public class ControlGUI extends JFrame {
 		//main panel
 		MainPanel mainPanel = new MainPanel();
 		f.getContentPane().setLayout(new BorderLayout());
-		add(mainPanel, BorderLayout.WEST);
+		add(mainPanel, BorderLayout.LINE_START);
+		
+		//button panel
+		ButtonPanel buttons = new ButtonPanel();
+		add(buttons, BorderLayout.EAST);
+		//Other panels inside
+//		InsidePanel diePanel = new InsidePanel();
+//		InsidePanel guessPanel = new InsidePanel();
+//		InsidePanel guessResultPanel = new InsidePanel();
 		
 		
 	}
