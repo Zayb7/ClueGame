@@ -275,4 +275,8 @@ public class Board {
 	public int getNumColumns() {
 		return numColumns;
 	}
+	
+	public String getRoomName() {
+		rooms.
+	}
 }

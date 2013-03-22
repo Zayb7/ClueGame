@@ -1,5 +1,6 @@
 package clueGame;
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.Assert;
@@ -40,9 +41,9 @@ public class GameActionTests {
     
 
     @Before
-    public void setUp()
+    public void setUp() throws FileNotFoundException, BadConfigFormatException
     {
-    	board = new Board();
+    	board = new Board("ConfigLayout.csv", "ConfigRooms.txt");
         control = new ClueGame(123, 6, board);
         
         //initialize all of the Person Cards
@@ -75,13 +76,13 @@ public class GameActionTests {
 	public void testAccusation()
     {
     	//tests the correct accusation
-        Assert.assertTrue(control.checkAccusation(plumCard, wrenchCard, kitchenCard));
+        Assert.assertTrue(control.checkAccusation(plumCard.getCardName(), wrenchCard.getCardName(), kitchenCard.getCardName()));
         //tests an accusation with wrong weapon
-        Assert.assertFalse(control.checkAccusation(plumCard, revolverCard, kitchenCard));
+        Assert.assertFalse(control.checkAccusation(plumCard.getCardName(), revolverCard.getCardName(), kitchenCard.getCardName()));
         //tests an accusation with the wrong player
-        Assert.assertFalse(control.checkAccusation(scarletCard, wrenchCard, kitchenCard));
+        Assert.assertFalse(control.checkAccusation(scarletCard.getCardName(), wrenchCard.getCardName(), kitchenCard.getCardName()));
         //tests an accusation with wrong weapon and wrong room
-        Assert.assertFalse(control.checkAccusation(plumCard, revolverCard, ballroomCard));
+        Assert.assertFalse(control.checkAccusation(plumCard.getCardName(), revolverCard.getCardName(), ballroomCard.getCardName()));
     }
 
     @Test
@@ -101,7 +102,7 @@ public class GameActionTests {
         //tests revealing a player card
         Assert.assertEquals(plumCard, player.disproveSuggestion(plumCard, studyCard, wrenchCard));
         //tests revealing a room card
-        Assert.assertEquals(conservatoryCard, player.disproveSuggestion(peacockCard, conservatoryCard, wrenchCard));
+        Assert.assertEquals(conservatoryCard, player.disproveSuggestion(whiteCard, conservatoryCard, wrenchCard));
         //tests revealing a weapon card
         Assert.assertEquals(knifeCard, player.disproveSuggestion(greenCard, studyCard, knifeCard));
         //tests revealing none of the cards

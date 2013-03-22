@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class ClueGame {
 	
-	ArrayList<Card> cards;
-	ArrayList<ComputerPlayer> computers;
-	Player human;
-	int turn;
+	private ArrayList<Card> cards;
+	private ArrayList<ComputerPlayer> computers;
+	private Player human;
+	private int turn;
+	
+	private String playerSolution = "Professor Plum", weaponSolution = "Wrench", roomSolution = "Kitchen";
 	
 	public ClueGame(int I_DONT_KNOW, int numberOfPlayers, Board board){
 		
@@ -25,7 +27,10 @@ public class ClueGame {
 		
 	}
 	
-	public boolean checkAccusation(Card mustardCard, Card candlestickCard, Card diningRoomCard) {
+	public boolean checkAccusation(String player, String weapon, String room) {
+		if (playerSolution.equals(player) && weaponSolution.equals(weapon) && roomSolution.equals(room)) {
+			return true;
+		}
 		return false;
 	}
 
