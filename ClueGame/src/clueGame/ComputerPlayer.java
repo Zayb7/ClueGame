@@ -31,8 +31,8 @@ public class ComputerPlayer extends Player {
 
 	public void makeSuggestion(ArrayList<Card> myCards) {
 		Card roomGuess = new Card(getLocation().getRoomName(), Card.CardType.ROOM); 
-		Card personGuess = pickOne(GameInfo.strPeople, Card.CardType.PERSON); 
-		Card weaponGuess = pickOne(GameInfo.strWeapons, Card.CardType.WEAPON);
+//		Card personGuess = pickOne(GameInfo.strPeople, Card.CardType.PERSON); 
+//		Card weaponGuess = pickOne(GameInfo.strWeapons, Card.CardType.WEAPON);
 		setGuess(personGuess, weaponGuess, roomGuess); 
 	}
 
