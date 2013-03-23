@@ -11,15 +11,29 @@ public class ComputerPlayer extends Player {
 
 	private Card personGuess, weaponGuess, roomGuess;
 	private ArrayList<Card> seenCards = new ArrayList<Card>();
+	private String lastRoom;
 
 	public ComputerPlayer(String name, Color color, ClueGame cg) {
 		super();
 		cards = new ArrayList<Card>();
 	}
 	
-	public BoardCell pickLocation(Set<BoardCell> targets){
-		int index = 0;
-		return null;
+	public BoardCell pickLocation(Set<BoardCell> targets) {
+		Random random = new Random();
+		int select = random.nextInt(targets.size()); 
+		int index = 0; 
+		BoardCell result = null;
+		for(BoardCell cell : targets) { 
+			BoardCell location = cell; 
+			if(location.isRoom() && !location.getRoomName().equals(lastRoom)) {
+				lastRoom = location.getRoomName();
+				return location; 
+			}
+			if(index == select) 
+				result = location; 
+			index++; 
+		}   
+		return result;
 	}
 
 	public void updateSeenCards(Card card) {

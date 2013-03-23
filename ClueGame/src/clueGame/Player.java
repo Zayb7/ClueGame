@@ -45,5 +45,9 @@ public class Player {
 	public BoardCell getLocation() {
 		return location;
 	}
+
+	public void updateSeenCards(Card result) {
+		
+	}
 	
 }
