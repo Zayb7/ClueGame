@@ -250,6 +250,7 @@ public class GameActionTests {
         compPlayer.updateSeenCards(scarletCard);
         compPlayer.updateSeenCards(plumCard);
         compPlayer.updateSeenCards(whiteCard);
+        
         compPlayer.updateSeenCards(candlestickCard);
         compPlayer.updateSeenCards(knifeCard);
         compPlayer.updateSeenCards(pipeCard);

@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 import clueGame.Card.CardType;
@@ -31,9 +32,26 @@ public class ComputerPlayer extends Player {
 
 	public void makeSuggestion(ArrayList<Card> myCards) {
 		Card roomGuess = new Card(getLocation().getRoomName(), Card.CardType.ROOM); 
-//		Card personGuess = pickOne(GameInfo.strPeople, Card.CardType.PERSON); 
-//		Card weaponGuess = pickOne(GameInfo.strWeapons, Card.CardType.WEAPON);
+		Card personGuess = pickGuess(SetUp.people, Card.CardType.PERSON); 
+		Card weaponGuess = pickGuess(SetUp.weapons, Card.CardType.WEAPON);
 		setGuess(personGuess, weaponGuess, roomGuess); 
+	}
+	
+	public Card pickGuess(String cards[], Card.CardType cardType) { 
+		ArrayList<Card> unseenCards = new ArrayList<Card>(); 
+		Random random = new Random();
+		int j = cards.length; 
+		for(int i = 0; i < j; i++) 
+		{ 
+			String card = cards[i]; 
+			Card cardPicked = new Card(card, cardType); 
+			if(!seenCards.contains(cardPicked)) 
+				unseenCards.add(cardPicked); 
+		}   
+		if(unseenCards.size() == 0) 
+			return null; 
+		else 
+			return (Card)unseenCards.get(random.nextInt(unseenCards.size())); 
 	}
 
 	public Card getPersonGuess() {
