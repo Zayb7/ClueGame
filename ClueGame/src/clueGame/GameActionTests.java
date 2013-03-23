@@ -44,7 +44,7 @@ public class GameActionTests {
     public void setUp() throws FileNotFoundException, BadConfigFormatException
     {
     	board = new Board("ConfigLayout.csv", "ConfigRooms.txt");
-        control = new ClueGame(123, 6, board);
+        control = new ClueGame(6, board);
         
         //initialize all of the Person Cards
         whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
@@ -156,40 +156,41 @@ public class GameActionTests {
         player.addCard(revolverCard);
         player.addCard(libraryCard);
         players.add(player);
+        
         player = new ComputerPlayer("Mr. Green", Color.green, control);
         player.addCard(plumCard);
         player.addCard(wrenchCard);
-        player.addCard(candlestickCard);
+        player.addCard(pipeCard);
         player.addCard(ballroomCard);
         players.add(player);
+        
         player = new ComputerPlayer("Mrs. Peacock", Color.blue, control);
         player.addCard(mustardCard);
-        player.addCard(pipeCard);
+        player.addCard(candlestickCard);
         player.addCard(kitchenCard);
         player.addCard(hallCard);
         players.add(player);
+        
         control.setPlayers(players);
         //Checks a suggestion to make sure that no players can disprove this
-        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
-        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), studyCard.getCardName(), ropeCard.getCardName(), player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard, diningRoomCard, ropeCard, player));
+        Assert.assertEquals(null, control.handleSuggestion(scarletCard, studyCard, ropeCard, player));
         //Checks a suggestion to make sure only a human could disprove it and returns the appropriate card
-        Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard.getCardName(), libraryCard.getCardName(), ropeCard.getCardName(), player));
-        Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard.getCardName(), diningRoomCard.getCardName(), ropeCard.getCardName(), player));
-        Assert.assertEquals(revolverCard, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), revolverCard.getCardName(), player));
+        Assert.assertEquals(libraryCard, control.handleSuggestion(scarletCard, libraryCard, ropeCard, player));
+        Assert.assertEquals(peacockCard, control.handleSuggestion(peacockCard, diningRoomCard, ropeCard, player));
+        Assert.assertEquals(revolverCard, control.handleSuggestion(scarletCard, diningRoomCard, revolverCard, player));
         //Checks to see if the person making the suggestion is the only one to disprove it, and will return null if true
-        Assert.assertEquals(null, control.handleSuggestion(scarletCard.getCardName(), diningRoomCard.getCardName(), candlestickCard.getCardName(), player));
+        Assert.assertEquals(null, control.handleSuggestion(mustardCard, hallCard, candlestickCard, player));
         
         int numPlum = 0, numLib = 0, numCandle = 0;
         for(int i = 0; i < 50; i++)
         {
-            Card returnCard = control.handleSuggestion(plumCard.getCardName(), libraryCard.getCardName(), candlestickCard.getCardName(), player);
+            Card returnCard = control.handleSuggestion(plumCard, libraryCard, candlestickCard, player);
             if(returnCard.equals(plumCard))
                 numPlum++;
-            else
-            if(returnCard.equals(libraryCard))
+            else if(returnCard.equals(libraryCard))
                 numLib++;
-            else
-            if(returnCard.equals(candlestickCard))
+            else if(returnCard.equals(candlestickCard))
                 numCandle++;
         }
 
@@ -204,10 +205,10 @@ public class GameActionTests {
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         //Computer Player set location at U4
-        compPlayer.setLocation(board.getCells(96));
-        board.startTargets(96, 3);
-        for(int i = 0; i < 100; i++)
-            Assert.assertEquals(96, compPlayer.pickLocation(board.getTargets()));
+        compPlayer.setLocation(board.getCells(board.calcIndex(3, 21)));
+        board.calcAdjacencies();
+        board.startTargets(board.calcIndex(3, 21), 3);
+        Assert.assertEquals(board.getCells(board.calcIndex(1, 20)), compPlayer.pickLocation(board.getTargets()));
     }
 
     @Test
@@ -215,28 +216,23 @@ public class GameActionTests {
     {
     	ComputerPlayer player = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
 		// Pick a location with no rooms in target, just three targets
-		board.startTargets(board.calcIndex(14, 0), 2);
+    	board.calcAdjacencies();
+		board.startTargets(board.calcIndex(14, 0), 4);
 		int loc1 = 0;
 		int loc2 = 0;
-		int loc3 = 0;
 		// Run the test 100 times
-		for (int i=0; i<100; i++) {
+		for (int i=0; i < 100; i++) {
 			BoardCell selected = player.pickLocation(board.getTargets());
-			if (selected == board.getCells(board.calcIndex(12, 0)))
+			if (selected == board.getCells(board.calcIndex(12, 1)))
 				loc1++;
-			else if (selected == board.getCells(board.calcIndex(14, 2)))
+			else if (selected == board.getCells(board.calcIndex(15, 0)))
 				loc2++;
-			else if (selected == board.getCells(board.calcIndex(15, 1)))
-				loc3++;
-			else
-				Assert.fail("Invalid target selected");
 		}
 		// Ensure we have 100 total selections (fail should also ensure)
-		Assert.assertEquals(100, loc1 + loc2 + loc3);
+		Assert.assertEquals(100, loc1 + loc2);
 		// Ensure each target was selected more than once
 		Assert.assertTrue(loc1 > 10);
 		Assert.assertTrue(loc2 > 10);
-		Assert.assertTrue(loc3 > 10);
     }
 
     @Test
@@ -269,12 +265,12 @@ public class GameActionTests {
     {
         ComputerPlayer compPlayer = new ComputerPlayer("Miss Scarlet", Color.magenta, control);
         //Cell V20
-        compPlayer.setLocation(board.getCells(497));
+        compPlayer.setLocation(board.getCells(board.calcIndex(1, 14)));
         compPlayer.updateSeenCards(mustardCard);
         compPlayer.updateSeenCards(peacockCard);
         compPlayer.updateSeenCards(whiteCard);
         compPlayer.updateSeenCards(greenCard);
-        ArrayList<Card> seenCards = compPlayer.getMyCards();
+        ArrayList<Card> seenCards = compPlayer.getSeenCards();
         compPlayer.updateSeenCards(candlestickCard);
         compPlayer.updateSeenCards(knifeCard);
         compPlayer.updateSeenCards(pipeCard);
@@ -282,23 +278,22 @@ public class GameActionTests {
         compPlayer.updateSeenCards(revolverCard);
         compPlayer.makeSuggestion(compPlayer.getMyCards());
         Assert.assertEquals(conservatoryCard, compPlayer.getRoomGuess());
-        int numGreen = 0;
-        int numWhite = 0;
+        int numScarlet = 0;
+        int numPlum = 0;
         //50 iterations for checking multiple matches
         for(int i = 0; i < 50; i++)
         {
-            compPlayer.makeSuggestion(compPlayer.getMyCards());
+            compPlayer.makeSuggestion(compPlayer.getSeenCards());
             Card suggestedCard = compPlayer.getPersonGuess();
-            if(suggestedCard.equals(greenCard))
-                numGreen++;
-            else if(suggestedCard.equals(whiteCard))
-                numWhite++;
-            suggestedCard = compPlayer.getPersonGuess();
+            if(suggestedCard.equals(scarletCard))
+                numScarlet++;
+            else if(suggestedCard.equals(plumCard))
+                numPlum++;
             Assert.assertEquals(wrenchCard, compPlayer.getWeaponGuess());
         }
 
-        Assert.assertEquals(50, numGreen + numWhite);
-        Assert.assertTrue(numGreen > 0);
-        Assert.assertTrue(numWhite > 0);
+        Assert.assertEquals(50, numPlum + numScarlet);
+        Assert.assertTrue(numPlum > 0);
+        Assert.assertTrue(numScarlet > 0);
     }
 }
