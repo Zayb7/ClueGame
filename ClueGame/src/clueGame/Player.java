@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,9 +9,13 @@ public class Player {
 	protected String name;
 	protected ArrayList<Card> cards;
 	protected BoardCell location;
+	protected Color color;
+	protected ClueGame cg;
 
-	public Player() {
-	
+	public Player(String name, Color color, ClueGame cg) {
+		this.name = name;
+		this.color = color;
+		this.cg = cg;
 	}
 	
 	public Card disproveSuggestion(Card person, Card room, Card weapon){

@@ -44,7 +44,7 @@ public class GameActionTests {
     public void setUp() throws FileNotFoundException, BadConfigFormatException
     {
     	board = new Board("ConfigLayout.csv", "ConfigRooms.txt");
-        control = new ClueGame(123, 6, board);
+        control = new ClueGame(6, board);
         
         //initialize all of the Person Cards
         whiteCard = new Card("Mrs. White", Card.CardType.PERSON);

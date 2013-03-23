@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,63 +12,13 @@ public class GameSetupTests
 	
 	private ClueGame control;
 	private Board board;
-	
-	//player cards
-    private Card mustardCard;
-    private Card whiteCard;
-    private Card peacockCard;
-    private Card scarletCard;
-    private Card greenCard;
-    private Card plumCard;
-    
-    //Room cards
-    private Card diningRoomCard;
-    private Card studyCard;
-    private Card libraryCard;
-    private Card ballroomCard;
-    private Card kitchenCard;
-    private Card hallCard;
-    private Card conservatoryCard;
-    
-    //Weapon cards
-    private Card candlestickCard;
-    private Card revolverCard;
-    private Card wrenchCard;
-    private Card knifeCard;
-    private Card pipeCard;
-    private Card ropeCard;
-    
 
     @Before
-    public void setUp()
+    public void setUp() throws FileNotFoundException, BadConfigFormatException
     {
-    	board = new Board();
-        control = new ClueGame(123, 6, board);
-        
-        //initialize all of the Person Cards
-        whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
-        mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
-        plumCard = new Card("Professor Plum", Card.CardType.PERSON);
-        peacockCard = new Card("Mrs. Peacock", Card.CardType.PERSON);
-        greenCard = new Card("Mr. Green", Card.CardType.PERSON);
-        scarletCard = new Card("Miss Scarlet", Card.CardType.PERSON);
-        
-        //initialize all of the Room Cards
-        diningRoomCard = new Card("Dining Room", Card.CardType.ROOM);
-        conservatoryCard = new Card("Conservatory", Card.CardType.ROOM);
-        libraryCard = new Card("Library", Card.CardType.ROOM);
-        ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
-        kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
-        hallCard = new Card("Hall", Card.CardType.ROOM);
-        studyCard = new Card("Study", Card.CardType.ROOM);
-        
-        //initialize all of the Weapon Cards
-        candlestickCard = new Card("Candlestick", Card.CardType.WEAPON);
-        revolverCard = new Card("Revolver", Card.CardType.WEAPON);
-        wrenchCard = new Card("Wrench", Card.CardType.WEAPON);
-        knifeCard = new Card("Knife", Card.CardType.WEAPON);
-        pipeCard = new Card("Lead Pipe", Card.CardType.WEAPON);
-        ropeCard = new Card("Rope", Card.CardType.WEAPON);
+    	board = new Board("ConfigLayout.csv", "ConfigRooms.txt");
+        control = new ClueGame(6, board);
+        control.start();
     }
 
     @Test
@@ -75,7 +26,8 @@ public class GameSetupTests
     {
         ArrayList<Player> players = control.getPlayers();
         int totalNumCards = 0;
-        Set<Card> allCards = new HashSet<Card>();
+        ArrayList<Card> allCards = new ArrayList<Card>();
+        ArrayList<Card> numberOfHumanCards = new ArrayList<Card>();
         for(Player p: players) {
             totalNumCards += p.getMyCards().size();
             for (Card card: p.getMyCards()) {
@@ -85,18 +37,18 @@ public class GameSetupTests
 
         totalNumCards += control.getHuman().getMyCards().size();
         for(Card card: control.getHuman().getMyCards()){
-        	allCards.add(card);
+        	numberOfHumanCards.add(card);
         }
 
         //Checks to make sure that there are 19 cards for all players
-        Assert.assertEquals(totalNumCards, 19);
+        Assert.assertEquals(18, totalNumCards);
         //Checks to make sure that human has 3 cards
-        Assert.assertEquals(allCards.size(), 3);
-        int totHumanCards = control.getHuman().getMyCards().size();
+        Assert.assertEquals(3, numberOfHumanCards.size());
+        int totalHumanCards = control.getHuman().getMyCards().size();
 
         for(Player player: players)
         	//Checking that the all players have three or four cards
-        	Assert.assertTrue(player.getMyCards().size() == totHumanCards || player.getMyCards().size() == totHumanCards + 1 || player.getMyCards().size() != totHumanCards - 1);
+        	Assert.assertTrue(player.getMyCards().size() == totalHumanCards || player.getMyCards().size() == totalHumanCards + 1 || player.getMyCards().size() == totalHumanCards - 1);
     }
 
     

@@ -14,26 +14,26 @@ public class ComputerPlayer extends Player {
 	private String lastRoom;
 
 	public ComputerPlayer(String name, Color color, ClueGame cg) {
-		super();
+		super(name, color, cg);
 		cards = new ArrayList<Card>();
 	}
 	
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		Random random = new Random();
-		int select = random.nextInt(targets.size()); 
+		int selectedRoom = random.nextInt(targets.size()); 
 		int index = 0; 
-		BoardCell result = null;
+		BoardCell pickedCell = null;
 		for(BoardCell cell : targets) { 
 			BoardCell location = cell; 
 			if(location.isRoom() && !location.getRoomName().equals(lastRoom)) {
 				lastRoom = location.getRoomName();
 				return location; 
 			}
-			if(index == select) 
-				result = location; 
+			if(index == selectedRoom) 
+				pickedCell = location; 
 			index++; 
 		}   
-		return result;
+		return pickedCell;
 	}
 
 	public void updateSeenCards(Card card) {

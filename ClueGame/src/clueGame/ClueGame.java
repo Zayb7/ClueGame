@@ -1,28 +1,48 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class ClueGame {
 	
-	private ArrayList<Card> cards;
+	private ArrayList<Card> cards = new ArrayList<Card>();
 	private ArrayList<Player> players;
-	private HumanPlayer human;
+	private HumanPlayer humanPlayer;
 	private int turn;
 	
 	private String playerSolution = "Professor Plum", weaponSolution = "Wrench", roomSolution = "Kitchen";
 	
-	public ClueGame(int I_DONT_KNOW, int numberOfPlayers, Board board){
+	public ClueGame(int numberOfPlayers, Board board){
 		
 	}
 
+	public void start() {
+		initializePlayers();
+		initializeCards();
+		deal();
+	}
 
 	public Player getHuman() {
-		return null;
+		return humanPlayer;
 	}
 	
-	public void Deal() {
-		
+	public void deal() {
+		int numberOfPlayers = players.size(); 
+		Player player = players.get(0); 
+		for(Card c : cards) { 
+			player.addCard(c);
+			if(numberOfPlayers == players.size()) { 
+				player = humanPlayer; 
+				numberOfPlayers = 0; 
+			} 
+			else { 
+				player = (Player)players.get(numberOfPlayers); 
+				ComputerPlayer comp = (ComputerPlayer) player; 
+				comp.updateSeenCards(c); 
+				numberOfPlayers++; 
+			} 
+		}
 	}
 	
 	public boolean checkAccusation(String player, String weapon, String room) {
@@ -62,7 +82,30 @@ public class ClueGame {
 	}
 	
 	public ArrayList<Player> getPlayers() {
-		return null;
+		return players;
 	}
 
+	public void initializePlayers() {
+		humanPlayer = new HumanPlayer(SetUp.people[0], SetUp.colors[0], this); 
+		players = new ArrayList<Player>(); 
+		for(int i = 0; i < 5; i++) {
+			players.add(new ComputerPlayer(SetUp.people[i], SetUp.colors[i], this));
+		}
+	}
+	
+	public void initializeCards() {
+		ArrayList<String> people = new ArrayList<String>(Arrays.asList(SetUp.people));
+		ArrayList<String> weapons = new ArrayList<String>(Arrays.asList(SetUp.weapons)); 
+		ArrayList<String> rooms = new ArrayList<String>(Arrays.asList(SetUp.weapons)); 
+		createCards(people, Card.CardType.PERSON); 
+		createCards(weapons, Card.CardType.WEAPON); 
+		createCards(rooms, Card.CardType.ROOM);
+	}
+	
+	public void createCards(ArrayList<String> names, Card.CardType type) {
+		for(String s: names) {
+			Card c = new Card(s, type);
+			cards.add(c);
+		}
+	}
 }
