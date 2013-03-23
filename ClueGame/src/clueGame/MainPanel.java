@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 public class MainPanel extends JPanel {
@@ -9,12 +10,15 @@ public class MainPanel extends JPanel {
 	
 	public MainPanel(){
 		
+		JPanel whoseTurnPanel = new JPanel();
 		//Label and text box for whoseTurn
-		JLabel whoseTurnLabel = new JLabel("Whose turn?");
-		whoseTurnText = new JTextField(5);
+		JLabel whoseTurnLabel = new JLabel(" Whose turn?");
 		setLayout(new GridLayout(0,1));
-		add(whoseTurnLabel, BorderLayout.NORTH);
-		add(whoseTurnText, BorderLayout.SOUTH);
+		whoseTurnPanel.add(whoseTurnLabel, BorderLayout.NORTH);
+		JTextField whoseTurnText = new JTextField(10);
+		whoseTurnPanel.add(whoseTurnText, BorderLayout.BEFORE_FIRST_LINE);
+		add(whoseTurnPanel, BorderLayout.WEST);
+
 		
 	}
 }
